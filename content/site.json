@@ -1,0 +1,22 @@
+{
+  "name": "Conspiracy Theories Explained",
+  "domain": "https://conspiracytheoriesexplained.com",
+  "tagline": "The Theory. The Evidence. Both Sides. You Decide...",
+  "description": "Just the cases laid out, so you can judge. Unsolved mysteries, fantastic stories and cover-ups, told with real documents.",
+  "author": "JR Korvus",
+  "company": "Sharing Ideas Network",
+  "contactEmail": "contact@conspiracytheoriesexplained.com",
+  "governingLaw": "USA",
+  "legalUpdated": "November 12, 2026",
+  "social": {
+    "youtube": "https://www.youtube.com/@CTExplainedTV",
+    "x": "https://x.com/CTExplainedTV",
+    "tiktok": "https://www.tiktok.com/@CTExplainedTV",
+    "instagram": "https://www.instagram.com/CTExplainedTV"
+  },
+  "newsletter": { "action": "", "emailField": "email_address" },
+  "contactForm": { "action": "" },
+  "amazonAssociate": false,
+  "directStoreName": "",
+  "headSnippet": ""
+}

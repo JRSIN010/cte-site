@@ -1,0 +1,11 @@
+[
+  { "youtubeId": "", "caseNo": "01", "category": "COVER-UPS", "line1": "TWO", "line2": "WORDS", "style": "cork",
+    "title": "Conspiracy Theory: Two Words That Changed the World", "note": "ROME TO TODAY", "stamp": "DECLASSIFIED", "book": "conspiracy-theory-two-words-that-changed-the-world",
+    "summary": "Some secret plots were real. Some were not. Here is how two words changed the way we argue about the truth." },
+  { "youtubeId": "", "caseNo": "02", "category": "COVER-UPS", "line1": "THE", "line2": "PAPERCLIP", "style": "gray",
+    "title": "The Paperclip Secret", "note": "NORDHAUSEN, 1945", "stamp": "CLASSIFIED", "book": "the-paperclip-secret",
+    "summary": "The rocket that went to the Moon had a hidden past. What the files say about Hitler's scientists in America." },
+  { "youtubeId": "", "caseNo": "03", "category": "COVER-UPS", "line1": "CASE NEVER", "line2": "CLOSED", "style": "cork",
+    "title": "Case Never Closed: The JFK Files in Their Own Words", "note": "DALLAS, 1963", "stamp": "DECLASSIFIED", "book": "case-never-closed",
+    "summary": "What the government's own papers say about the day President Kennedy was shot." }
+]

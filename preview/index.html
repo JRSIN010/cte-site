@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en" data-preview><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conspiracy Theories Explained Website</title>
+<style>/* Conspiracy Theories Explained — site styles
+   Layout idea: a detective's wall. Cork-board bands hold pinned things (videos, notes);
+   old dark-gray bands hold reading; cream paper sheets hold long text. */
+@font-face{font-family:Anton;src:url(fonts/anton-latin-400-normal.woff2) format("woff2");font-display:swap}
+@font-face{font-family:Oswald;font-weight:500;src:url(fonts/oswald-latin-500-normal.woff2) format("woff2");font-display:swap}
+@font-face{font-family:Oswald;font-weight:700;src:url(fonts/oswald-latin-700-normal.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"Special Elite";src:url(fonts/special-elite-latin-400-normal.woff2) format("woff2");font-display:swap}
+
+:root{
+  color-scheme:dark;
+  --ink:#15120f;        /* near-black plate, header, footer */
+  --gray:#3d3c3a;       /* old dark gray wall */
+  --cork:#ad7d4a;       /* cork board */
+  --paper:#ece2c9;      /* pinned paper */
+  --cream:#e8dcc0;      /* text on dark */
+  --red:#b5241f;        /* stamp red (fills) */
+  --red-hi:#ff6450;     /* red for text on dark/gray */
+  --type-ink:#231e17;   /* typewriter ink on paper */
+  --display:Anton,Impact,"Arial Narrow Bold",sans-serif;
+  --ui:Oswald,"Arial Narrow",Arial,sans-serif;
+  --type:"Special Elite","Courier New",monospace;
+  --body:Georgia,"Times New Roman",serif;
+  --wrap:72rem;
+  --cork-tex:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .24 0 0 0 0 .14 0 0 0 0 .07 -3.2 0 0 0 1.9'/%3E%3C/filter%3E%3Cfilter id='l'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .86 0 0 0 0 .68 0 0 0 0 .45 3.5 0 0 0 -1.9'/%3E%3C/filter%3E%3Crect width='300' height='300' fill='%23ad7d4a'/%3E%3Crect width='300' height='300' filter='url(%23c)'/%3E%3Crect width='300' height='300' filter='url(%23l)'/%3E%3C/svg%3E");
+  --gray-tex:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='4' seed='22' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .1 0 0 0 0 .1 0 0 0 2.4 -.9'/%3E%3C/filter%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03 .5' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .8 0 0 0 0 .8 0 0 0 0 .78 0 0 0 3 -1.95'/%3E%3C/filter%3E%3Crect width='400' height='400' fill='%23434240'/%3E%3Crect width='400' height='400' filter='url(%23m)'/%3E%3Crect width='400' height='400' filter='url(%23s)' opacity='.3'/%3E%3C/svg%3E");
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--gray) var(--gray-tex);color:var(--cream);font-family:var(--body);font-size:1.0625rem;line-height:1.6}
+img,svg{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid #ffd24d;outline-offset:3px}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:400}
+p{margin:0}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 1.25rem}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.skip{position:absolute;left:-999px;top:0;background:var(--paper);color:var(--type-ink);padding:.5rem 1rem;z-index:20}
+.skip:focus{left:.5rem;top:.5rem}
+
+/* ---------- header ---------- */
+.top{background:var(--ink);border-bottom:4px solid var(--red);position:relative;z-index:5}
+.top .wrap{display:flex;align-items:center;gap:.75rem 1.5rem;flex-wrap:wrap;padding-top:.6rem;padding-bottom:.6rem}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;margin-right:auto}
+.brand svg{width:52px;height:52px;flex:none}
+.brand b{font-family:var(--display);font-weight:400;font-size:1.15rem;line-height:1.02;letter-spacing:.04em;color:var(--cream);display:block}
+.brand b span{color:var(--red-hi)}
+.top .brand b{text-align:center}
+.brand.oneline b{white-space:nowrap}
+.nav{display:flex;align-items:center;gap:.2rem 1.1rem;flex-wrap:wrap;font-family:var(--ui);font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:.95rem}
+.nav a{text-decoration:none;padding:.35rem 0;border-bottom:3px solid transparent}
+.nav a:hover,.nav a[aria-current]{border-bottom-color:var(--red-hi)}
+.nav .btn{border-bottom:0}
+
+/* ---------- buttons, labels, stamps ---------- */
+.btn{display:inline-block;font-family:var(--ui);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:1rem;text-decoration:none;text-align:center;padding:.7rem 1.3rem .65rem;border:0;cursor:pointer;background:var(--red);color:#fff5e4;box-shadow:0 5px 0 #6e130f,0 10px 18px rgba(0,0,0,.35);transition:transform .08s,box-shadow .08s}
+.btn:hover{transform:translateY(2px);box-shadow:0 3px 0 #6e130f,0 6px 12px rgba(0,0,0,.35)}
+.btn.paper{background:var(--paper);color:var(--type-ink);box-shadow:0 5px 0 #a8997a,0 10px 18px rgba(0,0,0,.35)}
+.btn.paper:hover{box-shadow:0 3px 0 #a8997a,0 6px 12px rgba(0,0,0,.35)}
+.btn.small{font-size:.85rem;padding:.45rem .9rem .4rem;box-shadow:0 3px 0 #6e130f}
+.btn.off{background:#5b5a57;color:#d9d2c2;box-shadow:0 5px 0 #2c2b2a;cursor:default}
+.btn.off:hover{transform:none}
+.label{font-family:var(--type);letter-spacing:.18em;font-size:.85rem;text-transform:uppercase;display:flex;align-items:center;gap:.6rem}
+.label::before{content:"";width:.7rem;height:.7rem;background:var(--red-hi);flex:none}
+.stamp{display:inline-block;font-family:var(--ui);font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--red);border:.18em solid var(--red);padding:.05em .5em 0;transform:rotate(-4deg);filter:url(#worn)}
+.h-display{font-family:var(--display);text-transform:uppercase;letter-spacing:.02em;line-height:1}
+.h-sec{font-family:var(--display);text-transform:uppercase;font-size:clamp(1.9rem,4.5vw,3rem);line-height:1.02;letter-spacing:.02em}
+.h-sec em{font-style:normal;color:var(--red-hi)}
+.cork .h-sec em{color:#fff5e4;background:var(--red);padding:0 .25em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.pin{position:absolute;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#f19388 0,#b5241f 55%,#6e130f 100%);box-shadow:2px 4px 4px rgba(0,0,0,.45)}
+.pin.c{left:50%;top:8px;margin-left:-10px}
+
+/* ---------- bands ---------- */
+.band{padding:3.5rem 0;position:relative}
+.cork{background:var(--cork) var(--cork-tex);box-shadow:inset 0 0 140px 20px rgba(40,22,8,.55);color:var(--type-ink)}
+.dark{background:var(--ink)}
+.band-head{display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem}
+.cork .band-head .label{align-self:flex-start;background:var(--paper);padding:.35rem .7rem .2rem;box-shadow:0 4px 8px rgba(0,0,0,.35);transform:rotate(-1deg)}
+.cork .band-head .label::before{background:var(--red)}
+.cork .h-sec{color:var(--ink);text-shadow:0 1px 0 rgba(255,235,200,.35)}
+.band-foot{margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap}
+.lede{max-width:40rem;font-size:1.15rem}
+
+/* ---------- hero ---------- */
+.hero{padding:3rem 0 3.5rem;overflow:hidden}
+.hero .wrap{position:relative}
+.plate{position:relative;max-width:54rem;margin:0 auto;background:radial-gradient(ellipse at 50% 40%,#221d18 0,#120f0d 100%);color:var(--cream);padding:2.6rem clamp(1.25rem,4vw,3rem) 2.4rem;box-shadow:0 26px 60px rgba(30,15,5,.6);display:flex;flex-direction:column;gap:.9rem;z-index:2}
+.plate .pin:nth-child(1){left:12px;top:12px}.plate .pin:nth-child(2){right:12px;top:12px}
+.plate .pin:nth-child(3){left:12px;bottom:12px}.plate .pin:nth-child(4){right:12px;bottom:12px}
+.plate h1{font-family:var(--display);text-transform:uppercase;font-size:clamp(2rem,8.2vw,5.6rem);line-height:.96;letter-spacing:.01em;filter:url(#worn)}
+.plate h1{width:fit-content;max-width:100%}
+.plate h1 span{color:var(--red-hi);display:block;text-align:center}
+.plate .rule{height:4px;background:var(--red);border:0;margin:.2rem 0;width:100%}
+.plate .tag{font-family:var(--ui);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:clamp(1rem,2.4vw,1.4rem);line-height:1.3}
+.plate .tag b{color:var(--red-hi);font-weight:700}
+.plate p.sub{font-size:1.1rem}
+@media (min-width:62rem){.plate p.sub{font-size:1rem}}
+.plate .cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.6rem}
+.hero .newcase{position:absolute;right:clamp(.5rem,4vw,3rem);top:-1.2rem;z-index:3;width:7.2rem;height:7.2rem;border-radius:50%;border:5px double var(--red-hi);color:var(--red-hi);display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(9deg);font-family:var(--ui);font-weight:700;letter-spacing:.12em;font-size:.72rem;line-height:1.1;background:rgba(18,15,13,.9);text-transform:uppercase}
+.hero .newcase b{font-family:var(--display);font-weight:400;font-size:1.9rem;letter-spacing:.06em}
+.wall{display:none}
+@media (max-width:44rem){.hero .newcase{display:none}}
+@media (min-width:75rem){
+  .hero{padding:5rem 0 5.5rem}
+  .wall{display:block;position:absolute;inset:-5rem calc(50% - 50vw);pointer-events:none}
+  .wall svg{position:absolute;inset:0;width:100%;height:100%}
+  .note{position:absolute;background:var(--paper);color:var(--type-ink);font-family:var(--type);font-size:.85rem;line-height:1.5;padding:1.6rem 1rem .8rem;box-shadow:0 14px 28px rgba(40,20,5,.5);width:13rem}
+  .note b{font-family:var(--ui);font-weight:700;letter-spacing:.14em;display:block;border-bottom:2px solid var(--type-ink);margin-bottom:.4rem}
+  .note i{display:inline-block;height:.75rem;background:#1c1814;vertical-align:middle}
+  .note .r{color:var(--red)}
+  .city{position:absolute;background:var(--paper);color:var(--type-ink);font-family:var(--type);font-size:.8rem;letter-spacing:.12em;padding:.2rem .5rem 0;box-shadow:0 4px 8px rgba(0,0,0,.35)}
+}
+
+/* ---------- video thumbnails ---------- */
+.grid{display:grid;gap:2rem 1.75rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr))}
+.vcard{display:flex;flex-direction:column;gap:.8rem}
+.vcard h3{font-family:var(--ui);font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:1.2rem;line-height:1.2}
+.vcard p{font-size:1rem}
+.cork .vcard .txt{background:var(--paper);padding:1.2rem 1rem .9rem;box-shadow:0 10px 20px rgba(40,20,5,.45);position:relative;display:flex;flex-direction:column;gap:.4rem}
+.vcard .more{font-family:var(--ui);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.9rem;color:var(--red)}
+.gray-ctx .vcard .more{color:var(--red-hi)}
+.thumb{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;container-type:inline-size;text-decoration:none;box-shadow:0 14px 28px rgba(20,10,0,.55);border:0;padding:0;width:100%;cursor:pointer;font:inherit;color:var(--cream);text-align:left}
+.thumb.t-cork{background:var(--cork) var(--cork-tex)}
+.thumb.t-gray{background:#434240 var(--gray-tex)}
+.thumb::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 12cqw 2cqw rgba(0,0,0,.5);pointer-events:none}
+.thumb .badge{position:absolute;left:3.4cqw;top:5cqw;width:6.2cqw;height:6.2cqw;border-radius:50%;border:.4cqw double var(--cream);background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:2.2cqw;color:var(--cream)}
+.thumb .ttl{position:absolute;left:3.6cqw;top:21cqw;display:flex;flex-direction:column;align-items:flex-start;gap:1cqw;font-family:var(--display);font-size:9cqw;line-height:1.02;letter-spacing:.02em;text-transform:uppercase}
+.t-cork .ttl span{background:var(--ink);color:var(--paper);padding:.3cqw 1.7cqw 0;transform:rotate(-2deg);box-shadow:0 .8cqw 1.7cqw rgba(40,20,5,.55)}
+.t-cork .ttl span+span{background:var(--red);color:#f1e6cc;transform:rotate(1.5deg)}
+.t-gray .ttl{top:17cqw;gap:0;text-shadow:0 .3cqw 1.1cqw rgba(0,0,0,.45)}
+.t-gray .ttl span{color:#f1e8d2}.t-gray .ttl span+span{color:var(--red-hi)}
+.thumb .cat{position:absolute;left:4.5cqw;bottom:5.5cqw;font-family:var(--type);font-size:2.3cqw;letter-spacing:.12em;padding:.9cqw 1.6cqw .6cqw;transform:rotate(-2deg)}
+.t-cork .cat{background:var(--paper);color:var(--type-ink);box-shadow:0 .8cqw 1.7cqw rgba(40,20,5,.5)}
+.t-gray .cat{background:var(--red);color:#f1e6cc}
+.thumb .photo{position:absolute;right:7cqw;top:5cqw;width:36cqw;background:#f3eee2;padding:1.1cqw 1.1cqw 5.5cqw;transform:rotate(3deg);box-shadow:0 1.4cqw 2.8cqw rgba(40,20,5,.55)}
+.thumb .photo .ph{aspect-ratio:5/4;background:#2a2520;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:1.6cqw;padding:0 3cqw}
+.thumb .photo .ph i{display:block;height:2.2cqw;background:#0f0d0b}
+.thumb .photo small{position:absolute;left:0;right:0;bottom:1.2cqw;text-align:center;font-family:var(--type);font-size:2cqw;color:var(--type-ink);letter-spacing:.1em}
+.t-gray .photo{background:none;padding:0;box-shadow:none;right:5cqw;top:9cqw;width:30cqw;transform:rotate(6deg)}
+.t-gray .photo .ph{background:none;border:.5cqw solid var(--red-hi);aspect-ratio:auto;padding:1.2cqw 2cqw .6cqw;font-family:var(--ui);font-weight:700;font-size:3.6cqw;letter-spacing:.12em;color:var(--red-hi);text-align:center;display:block;filter:url(#worn)}
+.t-gray .photo small{position:static;display:block;color:var(--cream);margin-top:1.4cqw;opacity:.8}
+.thumb .pinv{position:absolute;right:24cqw;top:3.6cqw;width:2cqw;height:2cqw;border-radius:50%;background:radial-gradient(circle at 35% 35%,#f19388 0,#b5241f 55%,#6e130f 100%);box-shadow:.2cqw .4cqw .4cqw rgba(0,0,0,.4);z-index:1}
+.t-gray .pinv{display:none}
+.thumb .play{position:absolute;right:4cqw;bottom:5cqw;z-index:2;display:flex;align-items:center;gap:1.4cqw;background:rgba(15,12,10,.88);color:#fff5e4;font-family:var(--ui);font-weight:700;letter-spacing:.12em;font-size:max(2.6cqw,.7rem);text-transform:uppercase;padding:1.2cqw 2.2cqw 1cqw;border:.3cqw solid var(--cream)}
+.thumb .play::before{content:"";border-left:2cqw solid var(--red-hi);border-top:1.3cqw solid transparent;border-bottom:1.3cqw solid transparent}
+.thumb.soon .play::before{display:none}
+.thumb img.real{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.thumb img.real+.play{z-index:2}
+.thumb iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
+a.thumb:hover .play,button.thumb:hover .play{background:var(--red);border-color:#fff5e4}
+.thumb.short{aspect-ratio:9/16;max-width:16rem}
+
+/* ---------- pinned how-it-works notes ---------- */
+.steps{display:grid;gap:2rem 1.5rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));list-style:none;margin:0;padding:0}
+.steps li{position:relative;background:var(--paper);color:var(--type-ink);padding:2.2rem 1.2rem 1.3rem;box-shadow:0 14px 28px rgba(40,20,5,.5);display:flex;flex-direction:column;gap:.5rem}
+.steps li:nth-child(odd){transform:rotate(-1.2deg)}.steps li:nth-child(even){transform:rotate(1deg)}
+.steps .n{font-family:var(--type);letter-spacing:.16em;font-size:.85rem;color:var(--red)}
+.steps h3{font-family:var(--display);text-transform:uppercase;font-size:1.7rem;line-height:1.05}
+
+/* ---------- books ---------- */
+.cover{position:relative;display:flex;flex-direction:column;aspect-ratio:2/3;width:100%;container-type:inline-size;background:radial-gradient(circle at 50% 42%,#2a241e 0,#171411 55%,#0c0b0a 100%);color:var(--cream);overflow:hidden;box-shadow:0 18px 36px rgba(0,0,0,.55),inset 3px 0 0 rgba(255,255,255,.06);text-decoration:none;padding:9% 8% 8%}
+.cover::before{content:"";position:absolute;left:50%;top:44%;width:92cqw;height:92cqw;transform:translate(-50%,-50%);border-radius:50%;border:1.2cqw solid rgba(232,220,192,.1);outline:.5cqw solid rgba(232,220,192,.08);outline-offset:-5cqw}
+.cover>*{position:relative}
+.cover .c-label{font-family:var(--type);font-size:4.2cqw;letter-spacing:.2em;opacity:.85;margin-bottom:8cqw}
+.cover .c-title{font-family:var(--display);text-transform:uppercase;font-size:20cqw;line-height:.98;letter-spacing:.02em;filter:url(#worn);display:flex;flex-direction:column}
+.cover .c-title.long{font-size:12cqw;line-height:1.08}
+.cover .c-title .r{color:var(--red-hi)}
+.cover .c-stamp{align-self:flex-start;margin-top:7cqw;background:var(--red);color:#f1e6cc;font-family:var(--type);font-size:5.4cqw;letter-spacing:.18em;padding:1.6cqw 4cqw .9cqw;transform:rotate(-3deg);filter:url(#worn)}
+.cover .c-author{margin-top:auto;font-family:var(--ui);font-weight:700;letter-spacing:.3em;font-size:5cqw;text-transform:uppercase;border-top:.6cqw solid var(--red);padding-top:3cqw}
+.cover.img{padding:0;background:#0c0b0a}
+.cover.img::before{display:none}
+.cover.img img{width:100%;height:100%;object-fit:cover;display:block}
+.shelf{display:grid;gap:2.5rem 2rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr))}
+.bcard{display:flex;flex-direction:column;gap:1rem}
+.bcard .cover{max-width:17rem}
+.bcard h3{font-family:var(--display);text-transform:uppercase;font-size:1.6rem;line-height:1.05;letter-spacing:.02em}
+.bcard h3 a{text-decoration:none}.bcard h3 a:hover{color:var(--red-hi)}
+.status{font-family:var(--type);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red-hi)}
+.bcard .acts{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:auto;padding-top:.4rem}
+.bookpage{display:grid;gap:2.5rem 3rem;grid-template-columns:minmax(0,19rem) minmax(0,1fr);align-items:start}
+@media (max-width:48rem){.bookpage{grid-template-columns:1fr}.bookpage .cover{max-width:17rem}}
+.bookpage .info{display:flex;flex-direction:column;gap:1.2rem}
+.bookpage h1{font-family:var(--display);text-transform:uppercase;font-size:clamp(2.2rem,6vw,4rem);line-height:1}
+.bookpage .subt{font-family:var(--ui);font-weight:500;font-size:1.3rem;line-height:1.3;letter-spacing:.02em}
+.bookpage ul{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:.3rem}
+.bookpage h2{font-family:var(--ui);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:1.1rem;color:var(--red-hi)}
+.buy{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.fine{font-size:.9rem;opacity:.8}
+
+/* ---------- lead magnet + signup ---------- */
+.magnet{display:grid;gap:2.5rem 3rem;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:center}
+@media (max-width:52rem){.magnet{grid-template-columns:1fr}}
+.doc{position:relative;background:var(--paper);color:var(--type-ink);font-family:var(--type);padding:2.4rem 1.6rem 1.6rem;box-shadow:0 20px 44px rgba(0,0,0,.5);transform:rotate(-2deg);max-width:22rem;margin:0 auto;display:flex;flex-direction:column;gap:.7rem;font-size:.95rem}
+.doc h3{font-family:var(--display);text-transform:uppercase;font-size:2rem;line-height:1;border-bottom:3px solid var(--type-ink);padding-bottom:.5rem}
+.doc ol{margin:0;padding-left:1.4rem;display:flex;flex-direction:column;gap:.25rem}
+.doc .stamp{position:absolute;right:1rem;bottom:1rem;font-size:1.1rem;background:rgba(236,226,201,.85)}
+.magnet .copy{display:flex;flex-direction:column;gap:1rem}
+.signup{display:flex;gap:.7rem;flex-wrap:wrap;align-items:stretch}
+.signup input[type=email]{flex:1 1 14rem;min-width:0;font:inherit;font-family:var(--type);padding:.7rem .9rem .55rem;border:3px solid var(--type-ink);background:#fbf5e6;color:var(--type-ink)}
+.signup input::placeholder{color:#7b7262}
+.form-msg{flex-basis:100%;font-family:var(--type);font-size:.9rem;background:var(--paper);color:var(--type-ink);padding:.6rem .8rem .45rem;border-left:5px solid var(--red)}
+.form-msg[hidden]{display:none}
+.mgrid{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr))}
+.mcard{position:relative;background:var(--paper);color:var(--type-ink);padding:2.2rem 1.4rem 1.4rem;box-shadow:0 14px 28px rgba(40,20,5,.5);display:flex;flex-direction:column;gap:.6rem}
+.mcard h3{font-family:var(--display);text-transform:uppercase;font-size:1.7rem;line-height:1.05}
+.mcard .k{font-family:var(--type);font-size:.8rem;letter-spacing:.16em;color:var(--red)}
+
+/* ---------- page heads, paper sheets, blog ---------- */
+.page-head{background:var(--ink);padding:2.6rem 0 2.2rem;border-bottom:1px solid #2c2722}
+.page-head .wrap{display:flex;flex-direction:column;gap:.7rem}
+.page-head h1{font-family:var(--display);text-transform:uppercase;font-size:clamp(2.2rem,6.5vw,4.2rem);line-height:1;letter-spacing:.02em}
+.page-head p{max-width:40rem;font-size:1.15rem}
+.sheet{position:relative;background:var(--paper);color:var(--type-ink);max-width:46rem;margin:0 auto;padding:clamp(1.5rem,5vw,3.5rem);box-shadow:0 20px 44px rgba(0,0,0,.5);font-size:1.125rem;line-height:1.7}
+.sheet>*+*{margin-top:1.1rem}
+.sheet h2{font-family:var(--ui);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:1.45rem;line-height:1.2;margin-top:2.2rem;border-bottom:2px solid var(--type-ink);padding-bottom:.2rem}
+.sheet h3{font-family:var(--ui);font-weight:700;font-size:1.2rem;margin-top:1.6rem}
+.sheet a{color:#8c1a15;text-decoration:underline;text-underline-offset:.15em}
+.sheet a:hover{color:var(--type-ink)}
+.sheet ul,.sheet ol{padding-left:1.4rem}
+.sheet li+li{margin-top:.35rem}
+.sheet blockquote{margin-left:0;margin-right:0;padding:.2rem 0 .2rem 1rem;border-left:5px solid var(--red);font-style:italic}
+.sheet hr{border:0;border-top:2px dashed #8f846c;margin:2rem 0}
+.sheet .meta{font-family:var(--type);font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:#6a5f4c;margin-top:0}
+.sheet .endcta{margin-top:2.5rem;border:3px solid var(--type-ink);padding:1.3rem;display:flex;flex-direction:column;gap:.8rem}
+.sheet .endcta strong{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.6rem;line-height:1.05}
+.sheet .btn{color:#fff5e4;text-decoration:none}
+.posts{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr))}
+.pcard{position:relative;background:var(--paper);color:var(--type-ink);padding:2.2rem 1.4rem 1.3rem;box-shadow:0 14px 28px rgba(0,0,0,.45);display:flex;flex-direction:column;gap:.6rem;text-decoration:none}
+.pcard:hover{transform:translateY(-3px)}
+.pcard .k{font-family:var(--type);font-size:.78rem;letter-spacing:.14em;color:var(--red);text-transform:uppercase}
+.pcard h3{font-family:var(--display);text-transform:uppercase;font-size:1.6rem;line-height:1.08}
+.pcard .d{font-family:var(--type);font-size:.78rem;letter-spacing:.12em;color:#6a5f4c;margin-top:auto;padding-top:.5rem}
+
+/* ---------- contact ---------- */
+.cform{display:flex;flex-direction:column;gap:1rem}
+.cform label{font-family:var(--type);letter-spacing:.12em;font-size:.85rem;text-transform:uppercase;display:flex;flex-direction:column;gap:.3rem}
+.cform input,.cform textarea{font:inherit;font-family:var(--body);padding:.65rem .8rem;border:3px solid var(--type-ink);background:#fbf5e6;color:var(--type-ink);width:100%}
+.cform .hp{position:absolute;left:-9999px}
+.cform .btn{align-self:flex-start}
+
+/* ---------- footer ---------- */
+.foot{background:var(--ink);border-top:4px solid var(--red);padding:3rem 0 2rem;font-size:.98rem}
+.foot .cols{display:grid;gap:2rem;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr))}
+@media (max-width:48rem){.foot .cols{grid-template-columns:1fr 1fr}.foot .cols>div:first-child{grid-column:1/-1}}
+.foot h2{font-family:var(--ui);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.95rem;color:var(--red-hi);margin-bottom:.6rem}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.35rem}
+.foot a{text-decoration:none}.foot a:hover{text-decoration:underline}
+.foot .tagline{font-family:var(--ui);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin:.8rem 0 .5rem}
+.foot .tagline b{color:var(--red-hi)}
+.foot .legal{margin-top:2rem;padding-top:1.2rem;border-top:1px solid #2c2722;font-size:.85rem;opacity:.75;display:flex;gap:.5rem 1.5rem;flex-wrap:wrap}
+
+/* ---------- preview-only bar ---------- */
+.pvbar{background:#ffd24d;color:#1a1612;font-family:var(--ui);font-weight:500;font-size:.95rem;padding:.45rem 1.25rem;display:flex;gap:.4rem 1.2rem;flex-wrap:wrap;align-items:center;justify-content:center}
+.pvbar a{font-weight:700}
+.pv[hidden]{display:none}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.pcard{transition:none}}
+@media print{.top,.foot,.pvbar{display:none}body{background:#fff}.sheet{box-shadow:none}}
+.tablewrap{overflow-x:auto}.sheet table{border-collapse:collapse;width:100%;font-size:1rem}.sheet th,.sheet td{border:1px solid #8f846c;padding:.45rem .6rem;text-align:left;vertical-align:top}.sheet th{font-family:var(--ui);text-transform:uppercase;letter-spacing:.06em;font-size:.85rem;background:#ddd0b0}.sheet code{font-family:"Courier New",monospace;background:#ddd0b0;padding:0 .25em}</style></head><body>
+<div class="pvbar"><span>Preview of your website. Every page and button works. Videos and forms switch on when it goes live.</span><a href="#guide">Open the Go-Live Guide</a></div>
+<a class="skip" href="#main">Skip to content</a><svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="worn" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" seed="11" result="n"/><feColorMatrix in="n" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -5 3.6" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter></svg>
+<header class="top"><div class="wrap"><a class="brand" href="#home" aria-label="Conspiracy Theories Explained home"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#171411"/><circle cx="50" cy="50" r="45" fill="none" stroke="#e8dcc0" stroke-width="2.5"/><circle cx="50" cy="50" r="40" fill="none" stroke="#e8dcc0" stroke-width=".8"/><text x="50" y="57" text-anchor="middle" font-family="Anton,Impact,'Arial Narrow',sans-serif" font-size="34" letter-spacing="1" fill="#e8dcc0">CTE</text><rect x="22" y="64" width="56" height="11" fill="#b5241f" transform="rotate(-3 50 69)"/><text x="50" y="72.5" text-anchor="middle" font-family="'Special Elite','Courier New',monospace" font-size="7" letter-spacing="1" fill="#f1e6cc" transform="rotate(-3 50 69)">DECLASSIFIED</text></svg><b>Conspiracy Theories<br><span>Explained</span></b></a>
+<nav class="nav" aria-label="Main"><a href="#videos">Videos</a><a href="#books">Books</a><a href="#blog">Blog</a><a href="#about">About</a><a class="btn small" href="#free">Free checklist</a></nav></div></header>
+<main id="main"><div class="pv" id="pv-home">
+<section class="band cork hero"><div class="wrap">
+<div class="wall" aria-hidden="true">
+<svg viewBox="0 0 1000 500" preserveAspectRatio="none"><g stroke="#a51d17" stroke-width="2.5" fill="none" vector-effect="non-scaling-stroke"><path d="M70 70 L190 150" vector-effect="non-scaling-stroke"/><path d="M70 70 L60 330" vector-effect="non-scaling-stroke"/><path d="M60 330 L185 400" vector-effect="non-scaling-stroke"/><path d="M940 170 L815 150" vector-effect="non-scaling-stroke"/><path d="M940 170 L950 380" vector-effect="non-scaling-stroke"/><path d="M950 380 L815 420" vector-effect="non-scaling-stroke"/></g></svg>
+<div class="note" style="left:2%;top:14%;transform:rotate(-4deg)"><span class="pin c"></span><b>CASE FILE NO. 001</b>SUBJECT: <i style="width:5rem"></i><br>STATUS: <span class="r">UNSOLVED</span><br><i style="width:90%"></i><br><i style="width:65%"></i></div>
+<div class="note" style="right:2%;top:30%;transform:rotate(3deg)"><span class="pin c"></span><b>EVIDENCE</b>CASE: [OPEN]<br>LOCATION: <i style="width:4rem"></i><br>CLASSIFICATION: <span class="r">SECRET</span></div>
+<span class="city" style="left:3%;top:70%;transform:rotate(2deg)">DALLAS</span><span class="city" style="left:10%;top:84%;transform:rotate(-2deg)">ROSWELL</span>
+<span class="city" style="right:3%;top:74%;transform:rotate(-2deg)">DETROIT</span><span class="city" style="right:9%;top:83%;transform:rotate(2deg)">JERUSALEM</span>
+</div>
+<div class="plate"><span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span>
+<p class="label">CASE FILES · DECLASSIFIED</p>
+<h1>Conspiracy Theories <span>Explained</span></h1>
+<hr class="rule">
+<p class="tag">The Theory. The Evidence. Both Sides. <b>You Decide...</b></p>
+<p class="sub">Just the cases laid out, so you can judge. Unsolved mysteries, fantastic stories and cover-ups, told with real documents.</p>
+<div class="cta"><a class="btn" href="#videos">Watch the case files</a><a class="btn paper" href="#free">Get the free checklist</a></div>
+</div>
+<div class="newcase" aria-hidden="true"><span>★ ★ ★</span><b>NEW</b><span>Case File</span></div>
+</div></section>
+
+<section class="band gray-ctx"><div class="wrap">
+<div class="band-head"><p class="label">ON YOUTUBE</p><h2 class="h-sec">Latest <em>case files</em></h2></div>
+<div class="grid"><article class="vcard"><div class="thumb t-cork soon" role="img" aria-label="Conspiracy Theory: Two Words That Changed the World. Video coming soon."><span class="badge">CTE</span><span class="pinv"></span>
+<span class="photo"><span class="ph"><i style="width:80%"></i><i style="width:55%"></i><i style="width:70%"></i></span><small>ROME TO TODAY</small></span>
+<span class="ttl"><span>TWO</span><span>WORDS</span></span>
+<span class="cat">COVER-UPS · CASE FILE 01</span><span class="play">Coming soon</span></div><div class="txt"><h3>Conspiracy Theory: Two Words That Changed the World</h3><p>Some secret plots were real. Some were not. Here is how two words changed the way we argue about the truth.</p><a class="more" href="#book-conspiracy-theory-two-words-that-changed-the-world">From the book: Conspiracy Theory: Two Words That Changed the World &rarr;</a></div></article><article class="vcard"><div class="thumb t-gray soon" role="img" aria-label="The Paperclip Secret. Video coming soon."><span class="badge">CTE</span><span class="pinv"></span>
+<span class="photo"><span class="ph">CLASSIFIED</span><small>NORDHAUSEN, 1945</small></span>
+<span class="ttl"><span>THE</span><span>PAPERCLIP</span></span>
+<span class="cat">COVER-UPS · CASE FILE 02</span><span class="play">Coming soon</span></div><div class="txt"><h3>The Paperclip Secret</h3><p>The rocket that went to the Moon had a hidden past. What the files say about Hitler's scientists in America.</p><a class="more" href="#book-the-paperclip-secret">From the book: The Paperclip Secret &rarr;</a></div></article><article class="vcard"><div class="thumb t-cork soon" role="img" aria-label="Case Never Closed: The JFK Files in Their Own Words. Video coming soon."><span class="badge">CTE</span><span class="pinv"></span>
+<span class="photo"><span class="ph"><i style="width:80%"></i><i style="width:55%"></i><i style="width:70%"></i></span><small>DALLAS, 1963</small></span>
+<span class="ttl"><span>CASE NEVER</span><span>CLOSED</span></span>
+<span class="cat">COVER-UPS · CASE FILE 03</span><span class="play">Coming soon</span></div><div class="txt"><h3>Case Never Closed: The JFK Files in Their Own Words</h3><p>What the government's own papers say about the day President Kennedy was shot.</p><a class="more" href="#book-case-never-closed">From the book: Case Never Closed &rarr;</a></div></article></div>
+<div class="band-foot"><a class="btn" href="#videos">See all videos</a><a class="btn paper" href="https://www.youtube.com/@CTExplainedTV" rel="noopener">Subscribe on YouTube</a></div>
+</div></section>
+
+<section class="band cork"><div class="wrap">
+<div class="band-head"><p class="label">HOW EVERY CASE WORKS</p><h2 class="h-sec">Four steps. <em>Every time.</em></h2></div>
+<ol class="steps">
+<li><span class="pin c"></span><span class="n">STEP 01</span><h3>The Theory</h3><p>What do people say happened? You hear it the way its fans tell it.</p></li>
+<li><span class="pin c"></span><span class="n">STEP 02</span><h3>The Evidence</h3><p>Reports, memos, tapes and sworn words, with sources you can check.</p></li>
+<li><span class="pin c"></span><span class="n">STEP 03</span><h3>Both Sides</h3><p>The best case for it. The best case against it. Side by side.</p></li>
+<li><span class="pin c"></span><span class="n">STEP 04</span><h3>You Decide</h3><p>No verdict from me. The last step is yours.</p></li>
+</ol></div></section>
+
+<section class="band dark"><div class="wrap">
+<div class="band-head"><p class="label">THE BOOKS</p><h2 class="h-sec">Go deeper than a <em>video</em> can</h2><p class="lede">Each case file starts as a book by JR Korvus. The videos are the short version. The books hold the full story and the sources.</p></div>
+<div class="shelf"><article class="bcard"><a class="cover img" href="#book-conspiracy-theory-two-words-that-changed-the-world" aria-label="Conspiracy Theory: Two Words That Changed the World"><img src="images/cover-conspiracy-theory.jpg" alt="Cover of Conspiracy Theory: Two Words That Changed the World"></a><p class="status">Coming soon</p><h3><a href="#book-conspiracy-theory-two-words-that-changed-the-world">Conspiracy Theory: Two Words That Changed the World</a></h3><p>Two men each believed powerful people were hiding a crime. One was right and helped end a 40-year medical scandal. The other was wrong and walked into a pizza shop with a rifle. This book follows the strange history of conspiracy theories and asks how to tell a real cover-up from a false story.</p><div class="acts"><a class="btn small paper" href="#book-conspiracy-theory-two-words-that-changed-the-world">About this book</a></div></article><article class="bcard"><a class="cover img" href="#book-the-paperclip-secret" aria-label="The Paperclip Secret"><img src="images/cover-the-paperclip-secret.jpg" alt="Cover of The Paperclip Secret"></a><p class="status">Coming soon</p><h3><a href="#book-the-paperclip-secret">The Paperclip Secret</a></h3><p>In 1969 the world cheered as a giant rocket carried men to the Moon. Few knew that some of the men behind it had run a Nazi rocket factory where thousands of prisoners died. This book shows how their pasts were hidden, and how the truth finally came out.</p><div class="acts"><a class="btn small paper" href="#book-the-paperclip-secret">About this book</a></div></article><article class="bcard"><a class="cover img" href="#book-case-never-closed" aria-label="Case Never Closed"><img src="images/cover-case-never-closed.jpg" alt="Cover of Case Never Closed"></a><p class="status">Coming soon</p><h3><a href="#book-case-never-closed">Case Never Closed</a></h3><p>No one was ever put on trial for killing President Kennedy. The only man charged was shot dead two days later. This book uses the government's own released papers to show what was hidden, how it was hidden, and why the case never closed.</p><div class="acts"><a class="btn small paper" href="#book-case-never-closed">About this book</a></div></article></div>
+</div></section>
+<section class="band"><div class="wrap magnet">
+<div class="doc" aria-hidden="true"><span class="pin c"></span><p class="label">FREE DOWNLOAD</p><h3>The Evidence Checklist</h3>
+<ol><li>Who is making the claim?</li><li>Can I see the source myself?</li><li>Is it a fact, a guess or an opinion?</li><li>What would prove it wrong?</li><li>What does the other side say?</li></ol><p>... and 5 more.</p><span class="stamp">FREE</span></div>
+<div class="copy"><p class="label">FREE · 1 PAGE</p><h2 class="h-sec">Check any theory in <em>10 questions</em></h2>
+<p class="lede">Get the free Evidence Checklist. It is one page. Use it on any claim you hear, from any side. You will also get an email when a new case file comes out.</p>
+<form class="signup" data-form="newsletter" method="post">
+<label class="sr" for="email-1001">Your email</label>
+<input type="email" id="email-1001" name="email_address" placeholder="you@email.com" autocomplete="email" required>
+<button class="btn" type="submit">Send me the checklist</button>
+<p class="form-msg" role="status" hidden></p>
+</form>
+<p class="fine">No spam. Unsubscribe any time. <a href="#privacy">Privacy Policy</a>.</p></div></div></section>
+<section class="band cork"><div class="wrap">
+<div class="band-head"><p class="label">CASE NOTES</p><h2 class="h-sec">From the <em>blog</em></h2></div>
+<div class="posts"><a class="pcard" href="#post-the-rocket-with-a-hidden-past"><span class="pin c"></span><span class="k">COVER-UPS · CASE FILE 02</span><h3>The Rocket With a Hidden Past</h3><p>The Moon rocket was one of America's proudest moments. Some of the men behind it had run a Nazi rocket factory. The story behind The Paperclip Secret.</p><span class="d">NOV 18, 2026</span></a><a class="pcard" href="#post-two-men-who-saw-a-plot"><span class="pin c"></span><span class="k">COVER-UPS · CASE FILE 01</span><h3>Two Men Who Saw a Plot</h3><p>One man was right about a secret crime. One was wrong. The story behind the new book, Conspiracy Theory: Two Words That Changed the World.</p><span class="d">NOV 17, 2026</span></a><a class="pcard" href="#post-jfk-files-where-to-read-them"><span class="pin c"></span><span class="k">COVER-UPS · CASE FILE 03</span><h3>The JFK Files: Where to Read Them Yourself</h3><p>You do not have to trust anyone's summary. Here is where the real JFK records live, free.</p><span class="d">NOV 12, 2026</span></a></div>
+<div class="band-foot"><a class="btn" href="#blog">Read all case notes</a></div>
+</div></section></div>
+<div class="pv" id="pv-videos" hidden><header class="page-head"><div class="wrap"><p class="label">ON YOUTUBE</p><h1>Case File Videos</h1><p>Each video takes one case and walks through the theory, the evidence and both sides. Click a video to play it here.</p></div></header>
+<section class="band cork"><div class="wrap"><div class="grid"><article class="vcard"><div class="thumb t-cork soon" role="img" aria-label="Conspiracy Theory: Two Words That Changed the World. Video coming soon."><span class="badge">CTE</span><span class="pinv"></span>
+<span class="photo"><span class="ph"><i style="width:80%"></i><i style="width:55%"></i><i style="width:70%"></i></span><small>ROME TO TODAY</small></span>
+<span class="ttl"><span>TWO</span><span>WORDS</span></span>
+<span class="cat">COVER-UPS · CASE FILE 01</span><span class="play">Coming soon</span></div><div class="txt"><h3>Conspiracy Theory: Two Words That Changed the World</h3><p>Some secret plots were real. Some were not. Here is how two words changed the way we argue about the truth.</p><a class="more" href="#book-conspiracy-theory-two-words-that-changed-the-world">From the book: Conspiracy Theory: Two Words That Changed the World &rarr;</a></div></article><article class="vcard"><div class="thumb t-gray soon" role="img" aria-label="The Paperclip Secret. Video coming soon."><span class="badge">CTE</span><span class="pinv"></span>
+<span class="photo"><span class="ph">CLASSIFIED</span><small>NORDHAUSEN, 1945</small></span>
+<span class="ttl"><span>THE</span><span>PAPERCLIP</span></span>
+<span class="cat">COVER-UPS · CASE FILE 02</span><span class="play">Coming soon</span></div><div class="txt"><h3>The Paperclip Secret</h3><p>The rocket that went to the Moon had a hidden past. What the files say about Hitler's scientists in America.</p><a class="more" href="#book-the-paperclip-secret">From the book: The Paperclip Secret &rarr;</a></div></article><article class="vcard"><div class="thumb t-cork soon" role="img" aria-label="Case Never Closed: The JFK Files in Their Own Words. Video coming soon."><span class="badge">CTE</span><span class="pinv"></span>
+<span class="photo"><span class="ph"><i style="width:80%"></i><i style="width:55%"></i><i style="width:70%"></i></span><small>DALLAS, 1963</small></span>
+<span class="ttl"><span>CASE NEVER</span><span>CLOSED</span></span>
+<span class="cat">COVER-UPS · CASE FILE 03</span><span class="play">Coming soon</span></div><div class="txt"><h3>Case Never Closed: The JFK Files in Their Own Words</h3><p>What the government's own papers say about the day President Kennedy was shot.</p><a class="more" href="#book-case-never-closed">From the book: Case Never Closed &rarr;</a></div></article></div>
+
+<div class="band-foot"><a class="btn" href="https://www.youtube.com/@CTExplainedTV" rel="noopener">Subscribe on YouTube</a></div></div></section><section class="band"><div class="wrap magnet">
+<div class="doc" aria-hidden="true"><span class="pin c"></span><p class="label">FREE DOWNLOAD</p><h3>The Evidence Checklist</h3>
+<ol><li>Who is making the claim?</li><li>Can I see the source myself?</li><li>Is it a fact, a guess or an opinion?</li><li>What would prove it wrong?</li><li>What does the other side say?</li></ol><p>... and 5 more.</p><span class="stamp">FREE</span></div>
+<div class="copy"><p class="label">FREE · 1 PAGE</p><h2 class="h-sec">Check any theory in <em>10 questions</em></h2>
+<p class="lede">Get the free Evidence Checklist. It is one page. Use it on any claim you hear, from any side. You will also get an email when a new case file comes out.</p>
+<form class="signup" data-form="newsletter" method="post">
+<label class="sr" for="email-1002">Your email</label>
+<input type="email" id="email-1002" name="email_address" placeholder="you@email.com" autocomplete="email" required>
+<button class="btn" type="submit">Send me the checklist</button>
+<p class="form-msg" role="status" hidden></p>
+</form>
+<p class="fine">No spam. Unsubscribe any time. <a href="#privacy">Privacy Policy</a>.</p></div></div></section></div>
+<div class="pv" id="pv-books" hidden><header class="page-head"><div class="wrap"><p class="label">THE BOOKS</p><h1>Books by JR Korvus</h1><p>Real cases. Real documents. Both sides. Each book is the full version of a case file.</p></div></header>
+<section class="band"><div class="wrap"><div class="shelf"><article class="bcard"><a class="cover img" href="#book-conspiracy-theory-two-words-that-changed-the-world" aria-label="Conspiracy Theory: Two Words That Changed the World"><img src="images/cover-conspiracy-theory.jpg" alt="Cover of Conspiracy Theory: Two Words That Changed the World"></a><p class="status">Coming soon</p><h3><a href="#book-conspiracy-theory-two-words-that-changed-the-world">Conspiracy Theory: Two Words That Changed the World</a></h3><p><em>The Strange History of Conspiracy Theories, Cover-Ups and the Minds Caught Between Them</em></p><p>Two men each believed powerful people were hiding a crime. One was right and helped end a 40-year medical scandal. The other was wrong and walked into a pizza shop with a rifle. This book follows the strange history of conspiracy theories and asks how to tell a real cover-up from a false story.</p><div class="acts"><a class="btn" href="#free">Tell me when it is out</a><a class="btn small paper" href="#book-conspiracy-theory-two-words-that-changed-the-world">Details</a></div></article><article class="bcard"><a class="cover img" href="#book-the-paperclip-secret" aria-label="The Paperclip Secret"><img src="images/cover-the-paperclip-secret.jpg" alt="Cover of The Paperclip Secret"></a><p class="status">Coming soon</p><h3><a href="#book-the-paperclip-secret">The Paperclip Secret</a></h3><p><em>How America Hid the Crimes of Hitler's Scientists to Win the Race to the Moon</em></p><p>In 1969 the world cheered as a giant rocket carried men to the Moon. Few knew that some of the men behind it had run a Nazi rocket factory where thousands of prisoners died. This book shows how their pasts were hidden, and how the truth finally came out.</p><div class="acts"><a class="btn" href="#free">Tell me when it is out</a><a class="btn small paper" href="#book-the-paperclip-secret">Details</a></div></article><article class="bcard"><a class="cover img" href="#book-case-never-closed" aria-label="Case Never Closed"><img src="images/cover-case-never-closed.jpg" alt="Cover of Case Never Closed"></a><p class="status">Coming soon</p><h3><a href="#book-case-never-closed">Case Never Closed</a></h3><p><em>The JFK Assassination Cover-Up in the Government's Own Declassified Words</em></p><p>No one was ever put on trial for killing President Kennedy. The only man charged was shot dead two days later. This book uses the government's own released papers to show what was hidden, how it was hidden, and why the case never closed.</p><div class="acts"><a class="btn" href="#free">Tell me when it is out</a><a class="btn small paper" href="#book-case-never-closed">Details</a></div></article></div></div></section><section class="band"><div class="wrap magnet">
+<div class="doc" aria-hidden="true"><span class="pin c"></span><p class="label">FREE DOWNLOAD</p><h3>The Evidence Checklist</h3>
+<ol><li>Who is making the claim?</li><li>Can I see the source myself?</li><li>Is it a fact, a guess or an opinion?</li><li>What would prove it wrong?</li><li>What does the other side say?</li></ol><p>... and 5 more.</p><span class="stamp">FREE</span></div>
+<div class="copy"><p class="label">FREE · 1 PAGE</p><h2 class="h-sec">Check any theory in <em>10 questions</em></h2>
+<p class="lede">Get the free Evidence Checklist. It is one page. Use it on any claim you hear, from any side. You will also get an email when a new case file comes out.</p>
+<form class="signup" data-form="newsletter" method="post">
+<label class="sr" for="email-1003">Your email</label>
+<input type="email" id="email-1003" name="email_address" placeholder="you@email.com" autocomplete="email" required>
+<button class="btn" type="submit">Send me the checklist</button>
+<p class="form-msg" role="status" hidden></p>
+</form>
+<p class="fine">No spam. Unsubscribe any time. <a href="#privacy">Privacy Policy</a>.</p></div></div></section></div>
+<div class="pv" id="pv-book-conspiracy-theory-two-words-that-changed-the-world" hidden>
+<section class="band"><div class="wrap bookpage"><div class="cover img"><img src="images/cover-conspiracy-theory.jpg" alt="Cover of Conspiracy Theory: Two Words That Changed the World"></div>
+<div class="info"><p class="label">CASE FILE · ROME TO TODAY</p><h1>Conspiracy Theory: Two Words That Changed the World</h1><p class="subt">The Strange History of Conspiracy Theories, Cover-Ups and the Minds Caught Between Them</p>
+<p class="status">Coming soon · By JR Korvus</p><p class="lede">Two men each believed powerful people were hiding a crime. One was right and helped end a 40-year medical scandal. The other was wrong and walked into a pizza shop with a rifle. This book follows the strange history of conspiracy theories and asks how to tell a real cover-up from a false story.</p>
+<div class="buy"><a class="btn" href="#free">Tell me when it is out</a></div>
+<h2>What is inside</h2><ul><li>An introduction, 13 chapters and a conclusion</li><li>From the night Rome burned to the Illuminati and a forgery that would not die</li><li>Where the words &quot;conspiracy theory&quot; came from</li><li>Real cover-ups that turned out to be true, like the Tuskegee study and the FBI break-in of 1971</li><li>Why our brains see patterns, and the real people hurt by false stories</li><li>Notes and sources for every chapter</li></ul>
+<p><a href="#books">&larr; All books</a></p></div></div></section>
+<section class="band cork"><div class="wrap"><div class="band-head"><p class="label">WATCH FIRST</p><h2 class="h-sec">Videos from <em>this book</em></h2></div><div class="grid"><article class="vcard"><div class="thumb t-cork soon" role="img" aria-label="Conspiracy Theory: Two Words That Changed the World. Video coming soon."><span class="badge">CTE</span><span class="pinv"></span>
+<span class="photo"><span class="ph"><i style="width:80%"></i><i style="width:55%"></i><i style="width:70%"></i></span><small>ROME TO TODAY</small></span>
+<span class="ttl"><span>TWO</span><span>WORDS</span></span>
+<span class="cat">COVER-UPS · CASE FILE 01</span><span class="play">Coming soon</span></div><div class="txt"><h3>Conspiracy Theory: Two Words That Changed the World</h3><p>Some secret plots were real. Some were not. Here is how two words changed the way we argue about the truth.</p></div></article></div></div></section><section class="band"><div class="wrap magnet">
+<div class="doc" aria-hidden="true"><span class="pin c"></span><p class="label">FREE DOWNLOAD</p><h3>The Evidence Checklist</h3>
+<ol><li>Who is making the claim?</li><li>Can I see the source myself?</li><li>Is it a fact, a guess or an opinion?</li><li>What would prove it wrong?</li><li>What does the other side say?</li></ol><p>... and 5 more.</p><span class="stamp">FREE</span></div>
+<div class="copy"><p class="label">FREE · 1 PAGE</p><h2 class="h-sec">Check any theory in <em>10 questions</em></h2>
+<p class="lede">Get the free Evidence Checklist. It is one page. Use it on any claim you hear, from any side. You will also get an email when a new case file comes out.</p>
+<form class="signup" data-form="newsletter" method="post">
+<label class="sr" for="email-1004">Your email</label>
+<input type="email" id="email-1004" name="email_address" placeholder="you@email.com" autocomplete="email" required>
+<button class="btn" type="submit">Send me the checklist</button>
+<p class="form-msg" role="status" hidden></p>
+</form>
+<p class="fine">No spam. Unsubscribe any time. <a href="#privacy">Privacy Policy</a>.</p></div></div></section></div>
+<div class="pv" id="pv-book-the-paperclip-secret" hidden>
+<section class="band"><div class="wrap bookpage"><div class="cover img"><img src="images/cover-the-paperclip-secret.jpg" alt="Cover of The Paperclip Secret"></div>
+<div class="info"><p class="label">CASE FILE · NORDHAUSEN 1945</p><h1>The Paperclip Secret</h1><p class="subt">How America Hid the Crimes of Hitler's Scientists to Win the Race to the Moon</p>
+<p class="status">Coming soon · By JR Korvus</p><p class="lede">In 1969 the world cheered as a giant rocket carried men to the Moon. Few knew that some of the men behind it had run a Nazi rocket factory where thousands of prisoners died. This book shows how their pasts were hidden, and how the truth finally came out.</p>
+<div class="buy"><a class="btn" href="#free">Tell me when it is out</a></div>
+<h2>What is inside</h2><ul><li>An introduction, 13 chapters and a conclusion</li><li>The rocket factory inside a mountain, and the prisoners who built the V-2</li><li>How Operation Paperclip brought German scientists to America and cleaned up their files</li><li>The doctors from Dachau, and the trial that asked the wrong questions</li><li>Huntsville, the Saturn V and the race to the Moon</li><li>The survivors, the reporter and the Nazi hunter who opened the vaults</li><li>A note on sources, with disputed facts clearly marked</li></ul>
+<p><a href="#books">&larr; All books</a></p></div></div></section>
+<section class="band cork"><div class="wrap"><div class="band-head"><p class="label">WATCH FIRST</p><h2 class="h-sec">Videos from <em>this book</em></h2></div><div class="grid"><article class="vcard"><div class="thumb t-gray soon" role="img" aria-label="The Paperclip Secret. Video coming soon."><span class="badge">CTE</span><span class="pinv"></span>
+<span class="photo"><span class="ph">CLASSIFIED</span><small>NORDHAUSEN, 1945</small></span>
+<span class="ttl"><span>THE</span><span>PAPERCLIP</span></span>
+<span class="cat">COVER-UPS · CASE FILE 02</span><span class="play">Coming soon</span></div><div class="txt"><h3>The Paperclip Secret</h3><p>The rocket that went to the Moon had a hidden past. What the files say about Hitler's scientists in America.</p></div></article></div></div></section><section class="band"><div class="wrap magnet">
+<div class="doc" aria-hidden="true"><span class="pin c"></span><p class="label">FREE DOWNLOAD</p><h3>The Evidence Checklist</h3>
+<ol><li>Who is making the claim?</li><li>Can I see the source myself?</li><li>Is it a fact, a guess or an opinion?</li><li>What would prove it wrong?</li><li>What does the other side say?</li></ol><p>... and 5 more.</p><span class="stamp">FREE</span></div>
+<div class="copy"><p class="label">FREE · 1 PAGE</p><h2 class="h-sec">Check any theory in <em>10 questions</em></h2>
+<p class="lede">Get the free Evidence Checklist. It is one page. Use it on any claim you hear, from any side. You will also get an email when a new case file comes out.</p>
+<form class="signup" data-form="newsletter" method="post">
+<label class="sr" for="email-1005">Your email</label>
+<input type="email" id="email-1005" name="email_address" placeholder="you@email.com" autocomplete="email" required>
+<button class="btn" type="submit">Send me the checklist</button>
+<p class="form-msg" role="status" hidden></p>
+</form>
+<p class="fine">No spam. Unsubscribe any time. <a href="#privacy">Privacy Policy</a>.</p></div></div></section></div>
+<div class="pv" id="pv-book-case-never-closed" hidden>
+<section class="band"><div class="wrap bookpage"><div class="cover img"><img src="images/cover-case-never-closed.jpg" alt="Cover of Case Never Closed"></div>
+<div class="info"><p class="label">CASE FILE · DALLAS 1963</p><h1>Case Never Closed</h1><p class="subt">The JFK Assassination Cover-Up in the Government's Own Declassified Words</p>
+<p class="status">Coming soon · By JR Korvus</p><p class="lede">No one was ever put on trial for killing President Kennedy. The only man charged was shot dead two days later. This book uses the government's own released papers to show what was hidden, how it was hidden, and why the case never closed.</p>
+<div class="buy"><a class="btn" href="#free">Tell me when it is out</a></div>
+<h2>What is inside</h2><ul><li>An introduction, 10 chapters and a conclusion</li><li>The four days in Dallas, the Warren Commission and the bullet everyone argues about</li><li>What was hidden, how it was hidden, and the files released in 2025</li><li>A graded list of suspects, with both sides of each question</li><li>A timeline from 1963 to 2026</li><li>A guide to checking the book yourself, with sources by chapter</li></ul>
+<p><a href="#books">&larr; All books</a></p></div></div></section>
+<section class="band cork"><div class="wrap"><div class="band-head"><p class="label">WATCH FIRST</p><h2 class="h-sec">Videos from <em>this book</em></h2></div><div class="grid"><article class="vcard"><div class="thumb t-cork soon" role="img" aria-label="Case Never Closed: The JFK Files in Their Own Words. Video coming soon."><span class="badge">CTE</span><span class="pinv"></span>
+<span class="photo"><span class="ph"><i style="width:80%"></i><i style="width:55%"></i><i style="width:70%"></i></span><small>DALLAS, 1963</small></span>
+<span class="ttl"><span>CASE NEVER</span><span>CLOSED</span></span>
+<span class="cat">COVER-UPS · CASE FILE 03</span><span class="play">Coming soon</span></div><div class="txt"><h3>Case Never Closed: The JFK Files in Their Own Words</h3><p>What the government's own papers say about the day President Kennedy was shot.</p></div></article></div></div></section><section class="band"><div class="wrap magnet">
+<div class="doc" aria-hidden="true"><span class="pin c"></span><p class="label">FREE DOWNLOAD</p><h3>The Evidence Checklist</h3>
+<ol><li>Who is making the claim?</li><li>Can I see the source myself?</li><li>Is it a fact, a guess or an opinion?</li><li>What would prove it wrong?</li><li>What does the other side say?</li></ol><p>... and 5 more.</p><span class="stamp">FREE</span></div>
+<div class="copy"><p class="label">FREE · 1 PAGE</p><h2 class="h-sec">Check any theory in <em>10 questions</em></h2>
+<p class="lede">Get the free Evidence Checklist. It is one page. Use it on any claim you hear, from any side. You will also get an email when a new case file comes out.</p>
+<form class="signup" data-form="newsletter" method="post">
+<label class="sr" for="email-1006">Your email</label>
+<input type="email" id="email-1006" name="email_address" placeholder="you@email.com" autocomplete="email" required>
+<button class="btn" type="submit">Send me the checklist</button>
+<p class="form-msg" role="status" hidden></p>
+</form>
+<p class="fine">No spam. Unsubscribe any time. <a href="#privacy">Privacy Policy</a>.</p></div></div></section></div>
+<div class="pv" id="pv-blog" hidden><header class="page-head"><div class="wrap"><p class="label">CASE NOTES</p><h1>The Blog</h1><p>Short reads on the cases, the documents and how to check a claim for yourself.</p></div></header>
+<section class="band"><div class="wrap"><div class="posts"><a class="pcard" href="#post-the-rocket-with-a-hidden-past"><span class="pin c"></span><span class="k">COVER-UPS · CASE FILE 02</span><h3>The Rocket With a Hidden Past</h3><p>The Moon rocket was one of America's proudest moments. Some of the men behind it had run a Nazi rocket factory. The story behind The Paperclip Secret.</p><span class="d">NOV 18, 2026</span></a><a class="pcard" href="#post-two-men-who-saw-a-plot"><span class="pin c"></span><span class="k">COVER-UPS · CASE FILE 01</span><h3>Two Men Who Saw a Plot</h3><p>One man was right about a secret crime. One was wrong. The story behind the new book, Conspiracy Theory: Two Words That Changed the World.</p><span class="d">NOV 17, 2026</span></a><a class="pcard" href="#post-jfk-files-where-to-read-them"><span class="pin c"></span><span class="k">COVER-UPS · CASE FILE 03</span><h3>The JFK Files: Where to Read Them Yourself</h3><p>You do not have to trust anyone's summary. Here is where the real JFK records live, free.</p><span class="d">NOV 12, 2026</span></a><a class="pcard" href="#post-how-every-case-file-works"><span class="pin c"></span><span class="k">START HERE</span><h3>How Every Case File Works</h3><p>Four steps, every time. The theory, the evidence, both sides, and then you decide.</p><span class="d">NOV 10, 2026</span></a></div></div></section><section class="band"><div class="wrap magnet">
+<div class="doc" aria-hidden="true"><span class="pin c"></span><p class="label">FREE DOWNLOAD</p><h3>The Evidence Checklist</h3>
+<ol><li>Who is making the claim?</li><li>Can I see the source myself?</li><li>Is it a fact, a guess or an opinion?</li><li>What would prove it wrong?</li><li>What does the other side say?</li></ol><p>... and 5 more.</p><span class="stamp">FREE</span></div>
+<div class="copy"><p class="label">FREE · 1 PAGE</p><h2 class="h-sec">Check any theory in <em>10 questions</em></h2>
+<p class="lede">Get the free Evidence Checklist. It is one page. Use it on any claim you hear, from any side. You will also get an email when a new case file comes out.</p>
+<form class="signup" data-form="newsletter" method="post">
+<label class="sr" for="email-1007">Your email</label>
+<input type="email" id="email-1007" name="email_address" placeholder="you@email.com" autocomplete="email" required>
+<button class="btn" type="submit">Send me the checklist</button>
+<p class="form-msg" role="status" hidden></p>
+</form>
+<p class="fine">No spam. Unsubscribe any time. <a href="#privacy">Privacy Policy</a>.</p></div></div></section></div>
+<div class="pv" id="pv-post-the-rocket-with-a-hidden-past" hidden><header class="page-head"><div class="wrap"><p class="label">COVER-UPS · CASE FILE 02</p><h1>The Rocket With a Hidden Past</h1></div></header>
+<section class="band"><div class="wrap"><article class="sheet"><p class="meta">Nov 18, 2026 · By JR Korvus</p>
+<p>On <strong>July 16, 1969</strong>, a giant white rocket called the Saturn V lifted off in Florida. It carried three men to the Moon. Crowds cheered. Some cried.</p>
+<p>Now go back about 25 years, to a hill in the middle of Germany.</p>
+<h2>The factory inside the hill</h2>
+<p>Inside that hill, near the town of Nordhausen, the Nazis built a factory in tunnels. Prisoners dug the tunnels and built the rockets. Many of them never saw the sun for weeks.</p>
+<p>The rocket was the <strong>V-2</strong>, the world's first long-range guided missile.</p>
+<p>Historians at the Smithsonian's National Air and Space Museum have studied the numbers:</p>
+<ul><li>The V-2 killed a bit over <strong>5,000</strong> people in its attacks.</li><li>About <strong>60,000</strong> prisoners were sent into the camp system around the hill.</li><li>More than <strong>20,000</strong> of them are thought to have died there or on the marches out of it.</li><li>So at least twice as many people died building the V-2 as were killed by it.</li></ul>
+<h2>The link most people never heard about</h2>
+<p>Some of the men who ran that rocket work were later part of the team that built the Moon rocket.</p>
+<p>Arthur Rudolph ran day-to-day production at the underground V-2 factory. From 1963 to 1968, he ran the Saturn V program office at NASA. In 1984, after U.S. investigators looked into his past, he left the country and gave up his American citizenship. His friends still argue that he was treated unfairly. The book lays out both sides.</p>
+<h2>Why &quot;Paperclip&quot;?</h2>
+<p>After the war, U.S. officers went through the files of German scientists. They clipped a paperclip to the folders of the men they wanted most. A paperclip meant: this one, bring him to America.</p>
+<p>That simple office tool gave its name to one of the biggest secrets of the Cold War.</p>
+<p>Read more about the book: <a href="#book-the-paperclip-secret">The Paperclip Secret</a>. And if you want to read real government files yourself, <a href="#free">get the free Declassified Reading List</a>.</p>
+<div class="endcta"><strong>Want to check claims like this yourself?</strong><span>Get the free Evidence Checklist. One page, 10 questions.</span><a class="btn" href="#free">Get it free</a></div>
+<p><a href="#blog">&larr; All case notes</a></p></article></div></section></div>
+<div class="pv" id="pv-post-two-men-who-saw-a-plot" hidden><header class="page-head"><div class="wrap"><p class="label">COVER-UPS · CASE FILE 01</p><h1>Two Men Who Saw a Plot</h1></div></header>
+<section class="band"><div class="wrap"><article class="sheet"><p class="meta">Nov 17, 2026 · By JR Korvus</p>
+<p>Here are two men. Both believed powerful people were hurting the helpless in secret. Both felt they had to act.</p>
+<h2>The first man</h2>
+<p>In 1966, Peter Buxtun worked for the U.S. Public Health Service in San Francisco. He heard about a study in Macon County, Alabama, and asked to read the reports.</p>
+<p>What he found was hard to believe:</p>
+<ul><li>The study had been running since <strong>1932</strong>.</li><li>Hundreds of poor Black men with syphilis were told they were being treated for &quot;bad blood.&quot;</li><li>They were not being treated at all.</li><li>When penicillin became the standard cure in the 1940s, they did not get it.</li></ul>
+<p>His bosses told him he did not understand the science. He kept pushing for six years. In <strong>July 1972</strong>, his papers reached a reporter. Her story ran, and within months the study was shut down.</p>
+<p>He was right.</p>
+<h2>The second man</h2>
+<p>In <strong>December 2016</strong>, a man named Edgar Maddison Welch drove to a pizza place in Washington, D.C., with a rifle. Online stories said children were being held in its basement.</p>
+<p>He searched the building. He fired the rifle into a locked door. Behind it was computer equipment. There was no basement. There were no children.</p>
+<p>He was wrong.</p>
+<h2>The question in the middle</h2>
+<p>So how do you tell them apart? Both men saw a plot. Both were sure. One stopped a real crime. The other put real people in danger.</p>
+<p>That question is what my new book is about. It starts with the fire of ancient Rome and walks all the way to today. You will see how the words &quot;conspiracy theory&quot; were born, which cover-ups turned out to be true, and why our brains are so good at seeing patterns, even ones that are not there.</p>
+<p>Read more about the book: <a href="#book-conspiracy-theory-two-words-that-changed-the-world">Conspiracy Theory: Two Words That Changed the World</a>.</p>
+<div class="endcta"><strong>Want to check claims like this yourself?</strong><span>Get the free Evidence Checklist. One page, 10 questions.</span><a class="btn" href="#free">Get it free</a></div>
+<p><a href="#blog">&larr; All case notes</a></p></article></div></section></div>
+<div class="pv" id="pv-post-jfk-files-where-to-read-them" hidden><header class="page-head"><div class="wrap"><p class="label">COVER-UPS · CASE FILE 03</p><h1>The JFK Files: Where to Read Them Yourself</h1></div></header>
+<section class="band"><div class="wrap"><article class="sheet"><p class="meta">Nov 12, 2026 · By JR Korvus</p>
+<p>People argue about the JFK files all day long. Very few of them have read one.</p>
+<p>You can. The files are public and free. Here is where to look.</p>
+<h2>The big picture</h2>
+<ul><li>President John F. Kennedy was shot in Dallas on <strong>November 22, 1963</strong>.</li><li>In 1964, the Warren Commission said Lee Harvey Oswald acted alone.</li><li>In 1992, Congress passed a law to gather the records in one place and open them to the public.</li><li>On <strong>March 18, 2025</strong>, the National Archives began posting records that had been held back. More than 80,000 pages went up in about a day.</li></ul>
+<p>The whole collection holds more than six million pages. Most of it was already open before 2025.</p>
+<h2>Where to read</h2>
+<ul><li><a href="https://www.archives.gov/jfk" rel="noopener">The National Archives JFK page</a>. This is the front door.</li><li><a href="https://www.archives.gov/research/jfk/release-2025" rel="noopener">The 2025 release</a>. The newest files, as PDFs.</li><li><a href="https://www.maryferrell.org/" rel="noopener">The Mary Ferrell Foundation</a>. A free library that lets you search many of the files by word.</li></ul>
+<h2>How to read a file without getting lost</h2>
+<ol><li><strong>Check the date.</strong> Was it written before or after the event?</li><li><strong>Check who wrote it and who got it.</strong> A memo to the boss is not the same as a note to self.</li><li><strong>Look at what is blacked out.</strong> Then ask why.</li><li><strong>Read the whole page.</strong> One line out of place can change the meaning.</li></ol>
+<h2>Then what?</h2>
+<p>Then you compare. What does the official story say? What do the papers say? Where do they match, and where do they not?</p>
+<p>That is what my book <a href="#book-case-never-closed">Case Never Closed: The JFK Assassination Cover-Up in the Government's Own Declassified Words</a> does, chapter by chapter. And if you want the full list of free archives, <a href="#free">get the Declassified Reading List</a>.</p>
+<div class="endcta"><strong>Want to check claims like this yourself?</strong><span>Get the free Evidence Checklist. One page, 10 questions.</span><a class="btn" href="#free">Get it free</a></div>
+<p><a href="#blog">&larr; All case notes</a></p></article></div></section></div>
+<div class="pv" id="pv-post-how-every-case-file-works" hidden><header class="page-head"><div class="wrap"><p class="label">START HERE</p><h1>How Every Case File Works</h1></div></header>
+<section class="band"><div class="wrap"><article class="sheet"><p class="meta">Nov 10, 2026 · By JR Korvus</p>
+<p>Most shows about conspiracy theories want you to pick a team. Believe it all, or laugh at it all.</p>
+<p>I think that is the wrong game. A better game is to slow down and look.</p>
+<p>So every case file on this site, and every book and video, follows the same four steps.</p>
+<h2>1. The Theory</h2>
+<p>First, I tell the theory the way the people who believe it tell it. No eye rolls. If I cannot explain it fairly, I have not earned the right to judge it.</p>
+<h2>2. The Evidence</h2>
+<p>Next come the records. Reports, memos, photos, tapes, sworn words. I link to the source when I can, so you can read it yourself. If something is a guess, I label it as a guess.</p>
+<h2>3. Both Sides</h2>
+<p>Then I give the best case for the theory and the best case against it. Not a weak version of either one. The strongest version.</p>
+<h2>4. You Decide</h2>
+<p>And then I stop. I do not hand you an answer. You have a brain and you get to use it.</p>
+<h2>Why do it this way?</h2>
+<p>Because real cover-ups have happened. And because some wild stories are just stories. The only way to tell them apart is to check.</p>
+<p>Want a tool for that? <a href="#free">Get the free Evidence Checklist</a>. It is one page with 10 questions you can use on any claim.</p>
+<div class="endcta"><strong>Want to check claims like this yourself?</strong><span>Get the free Evidence Checklist. One page, 10 questions.</span><a class="btn" href="#free">Get it free</a></div>
+<p><a href="#blog">&larr; All case notes</a></p></article></div></section></div>
+<div class="pv" id="pv-about" hidden><header class="page-head"><div class="wrap"><p class="label">FILE · WHO IS BEHIND THIS</p><h1>About</h1></div></header><section class="band"><div class="wrap"><article class="sheet"><h2>What this is</h2>
+<p>Conspiracy Theories Explained looks at famous mysteries and cover-ups. Each one gets a book, and each book gets videos and Shorts on YouTube.</p>
+<p>I do not tell you what to believe. I show you the theory, the evidence and both sides. Then you decide.</p>
+<h2>How every case file works</h2>
+<ol><li><strong>The Theory.</strong> What do people say happened? I tell it the way its fans tell it.</li><li><strong>The Evidence.</strong> What do the papers, tapes and witnesses show? I point to the source so you can check it.</li><li><strong>Both Sides.</strong> What is the best case for it? What is the best case against it?</li><li><strong>You Decide.</strong> I stop there. The last step is yours.</li></ol>
+<h2>My rules</h2>
+<ul><li>I use sources you can check.</li><li>A guess is always marked as a guess.</li><li>I show both sides and I do not pick one.</li><li>If I get a fact wrong, I fix it and say so. <a href="#contact">Tell me here</a>.</li></ul>
+<h2>Who is JR Korvus?</h2>
+<p>JR Korvus is an investigator of forgotten stories, hidden histories, and enduring mysteries.</p>
+<p>His books wander through the spaces where documented history, ancient traditions, folklore, intelligence records, archaeology, and unanswered questions intersect. Rather than offering final answers, he invites readers to explore evidence, challenge assumptions, and decide for themselves.</p>
+<p>Some readers say his stories feel as though they were told by someone who quietly watched history unfold from the sidelines, never changing its course. Only remembering what others overlooked.</p>
+<p>Whether that's true is a mystery of its own.</p>
+<h2>Where to start</h2>
+<ul><li><a href="#videos">Watch the case files</a></li><li><a href="#books">See the books</a></li><li><a href="#free">Get the free Evidence Checklist</a></li></ul></article></div></section></div>
+<div class="pv" id="pv-privacy" hidden><header class="page-head"><div class="wrap"><p class="label">LEGAL · PRIVACY</p><h1>Privacy Policy</h1></div></header><section class="band"><div class="wrap"><article class="sheet"><p>Last updated: November 12, 2026</p>
+<p>This site is run by Sharing Ideas Network (&quot;we&quot;, &quot;us&quot;). This page tells you what we collect and why. We keep it short and plain.</p>
+<h2>What we collect</h2>
+<ul><li><strong>Your email address,</strong> if you sign up for emails or a free download.</li><li><strong>Your name, email and message,</strong> if you use the contact form.</li><li><strong>Basic visit numbers,</strong> like which pages get read. These do not tell us who you are.</li></ul>
+<p>We do not sell your information. We do not ask for more than we need.</p>
+<h2>How we use it</h2>
+<ul><li>To send you the emails or downloads you asked for.</li><li>To answer your message.</li><li>To see which pages are useful so we can make the site better.</li></ul>
+<p>You can stop the emails at any time. Every email has an unsubscribe link.</p>
+<h2>Other companies that help us run the site</h2>
+<p>Some tools we use are run by other companies. They handle your information under their own privacy policies.</p>
+<ul><li><strong>Email service:</strong> stores your email address and sends our emails.</li><li><strong>YouTube (Google):</strong> videos on this site come from YouTube. A video only loads after you click play. We use YouTube's privacy-enhanced mode.</li><li><strong>Amazon and our book store:</strong> if you click a buy button, you leave this site. The store handles your order and payment. We never see your card number.</li><li><strong>Web host:</strong> our host may log technical details like your IP address to deliver the pages.</li></ul>
+<h2>Cookies</h2>
+<p>See our <a href="#cookies">Cookie Policy</a>.</p>
+<h2>Your choices</h2>
+<p>You can ask us to show you, fix or delete the information we hold about you. Email contact@conspiracytheoriesexplained.com and we will answer within 30 days. Depending on where you live, you may have more rights under laws like the GDPR or the CCPA. We will honor them.</p>
+<h2>Children</h2>
+<p>This site is not made for children under 13. We do not knowingly collect information from them.</p>
+<h2>Changes</h2>
+<p>If we change this policy, we will post the new one here and change the date at the top.</p>
+<h2>Contact</h2>
+<p>Questions? Email contact@conspiracytheoriesexplained.com.</p></article></div></section></div>
+<div class="pv" id="pv-terms" hidden><header class="page-head"><div class="wrap"><p class="label">LEGAL · TERMS</p><h1>Terms of Use</h1></div></header><section class="band"><div class="wrap"><article class="sheet"><p>Last updated: November 12, 2026</p>
+<p>By using this site, you agree to these terms. If you do not agree, please do not use the site.</p>
+<h2>Who we are</h2>
+<p>This site is run by Sharing Ideas Network. You can reach us at contact@conspiracytheoriesexplained.com.</p>
+<h2>Our content</h2>
+<p>The words, videos, designs and downloads on this site belong to Sharing Ideas Network or to the people who let us use them. You may read them, share links to them and quote short parts with credit. Please do not copy, resell or repost whole pieces without asking first.</p>
+<h2>Free downloads</h2>
+<p>Free downloads are for your own use. You may print them. You may not sell them or post them as your own.</p>
+<h2>Buying books</h2>
+<p>Books are sold through other stores, like Amazon. Your order, payment and delivery are handled by that store under its terms. See our <a href="#refunds">Refund Policy</a>.</p>
+<h2>Be fair</h2>
+<p>Do not use this site to break the law, to bother other people or to harm the site.</p>
+<h2>No promises</h2>
+<p>We work hard to get things right, but we offer this site &quot;as is&quot;. We do not promise it will always be up, or free of mistakes. See our <a href="#disclaimer">Disclaimer</a>.</p>
+<h2>Limit of liability</h2>
+<p>As far as the law allows, Sharing Ideas Network is not liable for losses that come from using this site or relying on what is on it.</p>
+<h2>Links to other sites</h2>
+<p>We link to other websites. We do not run them and are not responsible for what is on them.</p>
+<h2>Governing law</h2>
+<p>These terms are governed by the laws of USA.</p>
+<h2>Changes</h2>
+<p>We may update these terms. The date at the top shows the latest version.</p></article></div></section></div>
+<div class="pv" id="pv-disclaimer" hidden><header class="page-head"><div class="wrap"><p class="label">LEGAL · DISCLAIMER</p><h1>Disclaimer</h1></div></header><section class="band"><div class="wrap"><article class="sheet"><p>Last updated: November 12, 2026</p>
+<h2>This is for learning and discussion</h2>
+<p>Everything here is for education and entertainment. It is not legal, medical, financial or other professional advice.</p>
+<h2>A theory is not a fact</h2>
+<p>We explain theories. Explaining a theory does not mean we say it is true. When something is a guess, we say so. When something is proven, we point to the source.</p>
+<h2>We are not accusing anyone</h2>
+<p>We report what records, courts, officials and witnesses have said. Nothing on this site says that any living person committed a crime unless a court has found so.</p>
+<h2>Opinions</h2>
+<p>Opinions on this site belong to the author. They are not statements of fact.</p>
+<h2>About the books</h2>
+<p>Some books use made-up composite characters to tell a true story more clearly. When a book does this, an author's note inside the book says so.</p>
+<h2>Mistakes and corrections</h2>
+<p>We try hard to be right. If you see a mistake, <a href="#contact">tell us</a>. We will check it, fix it and note the fix.</p>
+<h2>Other websites</h2>
+<p>We link to other sites and to original documents. We do not control those sites.</p></article></div></section></div>
+<div class="pv" id="pv-affiliate-disclosure" hidden><header class="page-head"><div class="wrap"><p class="label">LEGAL · DISCLOSURE</p><h1>Affiliate Disclosure</h1></div></header><section class="band"><div class="wrap"><article class="sheet"><p>Last updated: November 12, 2026</p>
+<h2>How this site earns money</h2>
+<p>This site earns money when you buy our books. That is what pays for the research, the videos and the site.</p>
+<h2>Links to stores</h2>
+<p>Links to Amazon and other stores go to our own books. We do not earn affiliate commissions from any link on this site right now. If that changes, we will say so here.</p>
+<h2>Free things</h2>
+<p>Our free downloads are free. We ask for your email so we can send them and tell you about new case files. You can unsubscribe at any time.</p>
+<h2>Questions</h2>
+<p>Email contact@conspiracytheoriesexplained.com.</p></article></div></section></div>
+<div class="pv" id="pv-cookies" hidden><header class="page-head"><div class="wrap"><p class="label">LEGAL · COOKIES</p><h1>Cookie Policy</h1></div></header><section class="band"><div class="wrap"><article class="sheet"><p>Last updated: November 12, 2026</p>
+<h2>What is a cookie?</h2>
+<p>A cookie is a small file a website saves in your browser. It helps a site remember things.</p>
+<h2>What this site does</h2>
+<ul><li><strong>This site does not set tracking cookies of its own.</strong></li><li><strong>Videos:</strong> a YouTube video loads only after you click play. YouTube may then set its own cookies. We use YouTube's privacy-enhanced mode to keep this low.</li><li><strong>Forms and stores:</strong> if you sign up for emails or click a buy button, the email service or store may use cookies on its own pages.</li><li><strong>Visit numbers:</strong> if we count visits, we use a tool that does not need cookies.</li></ul>
+<h2>Your choices</h2>
+<p>You can block or delete cookies in your browser settings. The site will still work.</p>
+<h2>More</h2>
+<p>See our <a href="#privacy">Privacy Policy</a>. Questions? Email contact@conspiracytheoriesexplained.com.</p></article></div></section></div>
+<div class="pv" id="pv-refunds" hidden><header class="page-head"><div class="wrap"><p class="label">LEGAL · REFUNDS</p><h1>Refund Policy</h1></div></header><section class="band"><div class="wrap"><article class="sheet"><p>Last updated: November 12, 2026</p>
+<h2>Books bought on Amazon</h2>
+<p>Amazon handles your order. Returns and refunds follow Amazon's own rules. Please ask Amazon for help with those orders.</p>
+<h2>eBooks bought from our store</h2>
+<p>Because an eBook is delivered right away, all sales are final once the file is downloaded. But we want you to be happy:</p>
+<ul><li>If the file is broken or will not open, email us and we will fix it or refund you.</li><li>If you bought the same book twice by mistake, email us and we will refund the extra copy.</li><li>Ask within 14 days of your order.</li></ul>
+<h2>How to ask</h2>
+<p>Email contact@conspiracytheoriesexplained.com with your order number and what went wrong. We answer within 3 business days.</p></article></div></section></div>
+<div class="pv" id="pv-contact" hidden><header class="page-head"><div class="wrap"><p class="label">FILE · CONTACT</p><h1>Contact</h1><p>Got a tip, a correction or a question? Send it here.</p></div></header>
+<section class="band"><div class="wrap"><div class="sheet">
+<form class="cform" data-form="contact" method="post">
+<label for="c-name">Your name<input id="c-name" name="name" autocomplete="name" required></label>
+<label for="c-email">Your email<input id="c-email" type="email" name="email" autocomplete="email" required></label>
+<label for="c-msg">Your message<textarea id="c-msg" name="message" rows="6" required></textarea></label>
+<div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<button class="btn" type="submit">Send message</button><p class="form-msg" role="status" hidden></p></form>
+<hr><h2>Other ways to reach us</h2><p>Email: contact@conspiracytheoriesexplained.com</p>
+<ul><li><a href="https://www.youtube.com/@CTExplainedTV" rel="noopener">YouTube</a></li><li><a href="https://x.com/CTExplainedTV" rel="noopener">X</a></li><li><a href="https://www.tiktok.com/@CTExplainedTV" rel="noopener">TikTok</a></li><li><a href="https://www.instagram.com/CTExplainedTV" rel="noopener">Instagram</a></li></ul>
+<p>Found a mistake in a video, post or book? Please tell us what it is and where you saw it. We check every one.</p></div></div></section></div>
+<div class="pv" id="pv-free" hidden><header class="page-head"><div class="wrap"><p class="label">FREE DOWNLOADS</p><h1>Free Case File Tools</h1><p>Enter your email once and get both. You will also hear when a new case file comes out.</p></div></header>
+<section class="band cork"><div class="wrap"><div class="mgrid"><article class="mcard"><span class="pin c"></span><span class="k">FREE · 1 PAGE</span><h3>The Evidence Checklist</h3><p>10 simple questions to ask before you believe a theory, or throw it out. Print it and keep it by your screen.</p></article><article class="mcard"><span class="pin c"></span><span class="k">FREE · 2 PAGES</span><h3>The Declassified Reading List</h3><p>Where to read real government files for free, and how to read one without getting lost.</p></article>
+<div class="mcard"><span class="pin c"></span><span class="k">GET BOTH</span><h3>Where should I send them?</h3><form class="signup" data-form="newsletter" method="post">
+<label class="sr" for="email-1008">Your email</label>
+<input type="email" id="email-1008" name="email_address" placeholder="you@email.com" autocomplete="email" required>
+<button class="btn" type="submit">Send them to me</button>
+<p class="form-msg" role="status" hidden></p>
+</form>
+<p class="fine">No spam. Unsubscribe any time. <a href="#privacy">Privacy Policy</a>.</p></div></div></div></section></div>
+<div class="pv" id="pv-thanks" hidden><header class="page-head"><div class="wrap"><p class="label">FILE RELEASED</p><h1>Thank you. Here are your files.</h1></div></header>
+<section class="band"><div class="wrap"><div class="sheet"><p>Your downloads are ready. Click to open or save them.</p>
+<ul><li><strong>The Evidence Checklist</strong> (the download link works on the live site)</li><li><strong>The Declassified Reading List</strong> (the download link works on the live site)</li></ul>
+<h2>What next?</h2><ul><li><a href="#videos">Watch the case files</a></li><li><a href="#books">See the books</a></li><li><a href="https://www.youtube.com/@CTExplainedTV" rel="noopener">Subscribe on YouTube</a></li></ul></div></div></section></div>
+<div class="pv" id="pv-guide" hidden><header class="page-head"><div class="wrap"><p class="label">FOR YOUR EYES ONLY</p><h1>Go-Live Guide</h1><p>How to put this site on ConspiracyTheoriesExplained.com. This page is only in the preview. Visitors never see it.</p></div></header><section class="band"><div class="wrap"><article class="sheet"><h2>The short version</h2>
+<p>Your site is built. To put it on ConspiracyTheoriesExplained.com you do five things:</p>
+<ol><li>Fill in your details (one small file).</li><li>Put the site on a free host. My pick is Cloudflare Pages.</li><li>Point your domain at it.</li><li>Connect three free tools: email list, contact form and book store.</li><li>Paste in your YouTube video IDs.</li></ol>
+<p>You can do steps 1, 4 and 5 by just asking Claude. Sample things to say are at the end.</p>
+<h2>What it costs</h2>
+<div class="tablewrap"><table><thead><tr><th>Thing</th><th>My pick</th><th>Cost</th></tr></thead><tbody><tr><td>Hosting</td><td>Cloudflare Pages</td><td>$0</td></tr><tr><td>Domain</td><td>You already own it</td><td>Only your yearly renewal</td></tr><tr><td>Email list</td><td>Kit (free plan)</td><td>$0 up to 10,000 subscribers</td></tr><tr><td>Book store</td><td>Payhip (free plan)</td><td>$0 a month, 5% of each sale plus card fees</td></tr><tr><td>Contact form</td><td>Formspree (free plan)</td><td>$0</td></tr><tr><td>contact@ email address</td><td>Cloudflare Email Routing</td><td>$0</td></tr></tbody></table></div>
+<p>So you can start at <strong>$0 a month</strong>. You only pay when a book sells. Prices were checked in November 2026. Check each company's pricing page before you sign up, because plans change.</p>
+<h2>Hosting: which one?</h2>
+<div class="tablewrap"><table><thead><tr><th>Host</th><th>Free plan</th><th>Good</th><th>Watch out</th></tr></thead><tbody><tr><td><strong>Cloudflare Pages</strong> (my pick)</td><td>Unlimited visitors, 500 updates a month, your own domain with a free security lock</td><td>Never charges you for a traffic spike. Free email forwarding and free visit counts in the same account.</td><td>The dashboard has a lot of menus.</td></tr><tr><td><strong>Netlify</strong></td><td>300 credits a month. One update costs 15 credits.</td><td>The easiest. You can drag a folder onto the page and it is live.</td><td>If you run out of credits, the site pauses until next month. The next plan is $9 a month.</td></tr><tr><td><strong>Vercel</strong></td><td>Free &quot;Hobby&quot; plan</td><td>Fast and simple</td><td>The free plan is for personal, non-business sites only. Your site sells books, so skip it.</td></tr></tbody></table></div>
+<h3>How Claude can run it for you</h3>
+<p>All three hosts can update by themselves. Here is the setup that works best:</p>
+<ol><li>Your site files live in a free <strong>GitHub</strong> account. Think of it as a safe folder in the cloud that remembers every change.</li><li><strong>Cloudflare Pages</strong> watches that folder. When a file changes, it rebuilds the site in about a minute.</li><li><strong>Claude</strong> makes the changes. You say &quot;add a blog post about the magic bullet&quot; or &quot;add my new video&quot;, and Claude edits the files and saves them to GitHub. The site updates itself.</li></ol>
+<p>Claude's connector list also has a <strong>Netlify</strong> connector and a <strong>Cloudflare</strong> connector. If you turn one on, Claude can publish and check the site for you. You can also give Claude a scheduled task, like &quot;every Monday, draft a blog post from my newest video and show it to me first.&quot;</p>
+<h2>Step 1. Fill in your details</h2>
+<p>Open `content/site.json`. Check each line:</p>
+<ul><li><strong>company:</strong> I used &quot;Sharing Ideas Network&quot;. Change it if your company has a different legal name.</li><li><strong>contactEmail:</strong> I used contact@conspiracytheoriesexplained.com. Step 4 shows how to make that address work for free.</li><li><strong>governingLaw:</strong> type your state or country. This shows in the Terms of Use.</li><li><strong>social:</strong> I used the handle @CTExplainedTV for all four. Change these if you pick a different handle. Clear a line if you do not use that app.</li><li><strong>amazonAssociate:</strong> leave it `false` unless you join Amazon's affiliate program. If you join, change it to `true` and the right legal sentence appears by itself.</li></ul>
+<h2>Step 2. Add your real book covers</h2>
+<p>Right now the site draws a cover for each book in your channel's style. To show your real covers, save them into the `images` folder with these exact names:</p>
+<ul><li>`cover-conspiracy-theory.jpg`</li><li>`cover-the-paperclip-secret.jpg`</li><li>`cover-case-never-closed.jpg`</li></ul>
+<p>The site picks them up by itself the next time it builds.</p>
+<h2>Step 3. Put the site online</h2>
+<h3>Option A: the 10-minute way (no GitHub)</h3>
+<ol><li>Make a free account at cloudflare.com.</li><li>Go to <strong>Workers and Pages</strong>, choose <strong>Create</strong>, then <strong>Pages</strong>, then <strong>Upload assets</strong>.</li><li>Name the project and drag in the `dist` folder from your site files.</li><li>Click <strong>Deploy</strong>. You get a test address that ends in `.pages.dev`. Open it and look around.</li></ol>
+<p>To update the site later, you upload the new `dist` folder again.</p>
+<h3>Option B: the automated way (best with Claude)</h3>
+<ol><li>Make a free account at github.com and create a private repository called `cte-site`.</li><li>Ask Claude to put the site files into it.</li><li>In Cloudflare, go to <strong>Workers and Pages</strong>, choose <strong>Create</strong>, then <strong>Pages</strong>, then <strong>Connect to Git</strong>. Pick the `cte-site` repository.</li><li>Type these two settings. Build command: `node build.js`. Output folder: `dist`.</li><li>Click <strong>Save and Deploy</strong>.</li></ol>
+<p>From now on, every change saved to GitHub goes live by itself.</p>
+<p>Menu names in Cloudflare change from time to time. If a button has a new name, look for the words Pages, Upload or Git.</p>
+<h2>Step 4. Point your domain at the site</h2>
+<ol><li>In Cloudflare, click <strong>Add a domain</strong> and type conspiracytheoriesexplained.com. Pick the Free plan.</li><li>Cloudflare shows you two &quot;nameservers&quot;. Log in where you bought the domain and replace the old nameservers with those two.</li><li>Wait. It can take a few minutes or up to a day.</li><li>Back in your Pages project, open <strong>Custom domains</strong> and add conspiracytheoriesexplained.com and www.conspiracytheoriesexplained.com.</li></ol>
+<p>The security lock (https) turns on by itself.</p>
+<p><strong>Free email address:</strong> in Cloudflare, open <strong>Email</strong>, then <strong>Email Routing</strong>. Create contact@conspiracytheoriesexplained.com and forward it to your own inbox.</p>
+<h2>Step 5. Connect the three tools</h2>
+<h3>Email list (Kit)</h3>
+<ol><li>Make a free account at kit.com and create a <strong>Form</strong>.</li><li>In the form's settings, set &quot;after someone signs up&quot; to send them to `https://conspiracytheoriesexplained.com/thanks/`. That page hands over both free PDFs, so you do not need any paid automation.</li><li>Copy the form's embed code and give it to Claude. Claude will put the right address into `newsletter.action` in `content/site.json`.</li></ol>
+<p>Why Kit: its free plan allows up to 10,000 subscribers. MailerLite's free plan dropped to 250 in June 2026.</p>
+<h3>Contact form (Formspree)</h3>
+<ol><li>Make a free account at formspree.io and create a form. Send it to your contact@ address.</li><li>Copy the form address. It looks like `https://formspree.io/f/abcd1234`.</li><li>Paste it into `contactForm.action` in `content/site.json`.</li></ol>
+<h3>Book store (Payhip and Amazon)</h3>
+<ol><li>Make a free account at payhip.com. Add each eBook as a digital product and upload the file.</li><li>Copy the product link. Paste it into `directUrl` for that book in `content/books.json`.</li><li>When a book is live on Amazon, paste its Amazon link into `amazonUrl`.</li><li>Change `status` from &quot;Coming soon&quot; to &quot;Out now&quot;.</li><li>Put &quot;Payhip&quot; in `directStoreName` in `content/site.json`. This updates the legal pages.</li></ol>
+<p>A book with no links shows a &quot;Tell me when it is out&quot; button that collects emails. So the site works for you even before launch day.</p>
+<h2>Step 6. Add your videos</h2>
+<p>Open `content/videos.json`. Each video has a line called `youtubeId`.</p>
+<ol><li>Open your video on YouTube. Look at the address. The ID is the part after `v=`. Example: in `youtube.com/watch?v=AbC123xyz_0` the ID is `AbC123xyz_0`.</li><li>Paste the ID between the quotes.</li></ol>
+<p>The video now plays on your site and shows your real thumbnail. A video with no ID shows a &quot;Coming soon&quot; card in your cork or gray style. For a Short, add `&quot;short&quot;: true` to that video.</p>
+<h2>Step 7. Write blog posts</h2>
+<p>Each post is one text file in `content/posts`. Copy an old one, change the title, date and words, and save it. Or just ask Claude.</p>
+<p>I wrote three starter posts so the blog is not empty. Please read them and change anything you like before you go live.</p>
+<h2>Changing small words</h2>
+<p>The home page headlines, the menu names, the button labels and the footer lines are all in `content/home.json`. Open it, change the words between the quote marks and save.</p>
+<p>The same kind of words for every other page (page titles, contact form labels, small links) are in `content/other-pages.json`.</p>
+<ul><li>To make words red in a headline, put stars around them, like `Latest <em>case files</em>`.</li><li>Headlines show in ALL CAPS by design, however you type them.</li></ul>
+<h2>Step 8. After you go live</h2>
+<ul><li>Click every button once. Send yourself a test message and a test sign-up.</li><li>Go to Google Search Console (free) and submit `https://conspiracytheoriesexplained.com/sitemap.xml`. This tells Google your pages exist.</li><li>Put the site link on your YouTube channel page and in every video description.</li><li>Turn on <strong>Web Analytics</strong> in Cloudflare. It is free and uses no cookies.</li></ul>
+<h2>About the legal pages</h2>
+<p>The site has six: Privacy, Terms, Disclaimer, Affiliate Disclosure, Cookies and Refunds. They are plain-language starting points that fit how this site works. I am not a lawyer. Before you sell, have a lawyer look them over, mainly for your state or country.</p>
+<h2>Things to say to Claude</h2>
+<ul><li>&quot;Add this video to my site. The YouTube link is ...&quot;</li><li>&quot;Write a blog post from this video script and add it to the site.&quot;</li><li>&quot;My JFK book is live on Amazon. Here is the link. Update the site.&quot;</li><li>&quot;Change the home page headline to ...&quot;</li><li>&quot;Make a new free download about ... and add it to the Free page.&quot;</li></ul>
+<h2>What is in the folder</h2>
+<ul><li>`content` holds your words and settings. This is the only folder you need to touch.</li><li>`images` holds your covers.</li><li>`downloads` holds your free PDFs.</li><li>`dist` is the finished website. This is what goes online.</li><li>`build.js` turns `content` into `dist`. Claude or Cloudflare runs it. You do not have to.</li></ul></article></div></section></div></main>
+<footer class="foot"><div class="wrap"><div class="cols">
+<div><a class="brand oneline" href="#home"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#171411"/><circle cx="50" cy="50" r="45" fill="none" stroke="#e8dcc0" stroke-width="2.5"/><circle cx="50" cy="50" r="40" fill="none" stroke="#e8dcc0" stroke-width=".8"/><text x="50" y="57" text-anchor="middle" font-family="Anton,Impact,'Arial Narrow',sans-serif" font-size="34" letter-spacing="1" fill="#e8dcc0">CTE</text><rect x="22" y="64" width="56" height="11" fill="#b5241f" transform="rotate(-3 50 69)"/><text x="50" y="72.5" text-anchor="middle" font-family="'Special Elite','Courier New',monospace" font-size="7" letter-spacing="1" fill="#f1e6cc" transform="rotate(-3 50 69)">DECLASSIFIED</text></svg><b>Conspiracy Theories <span>Explained</span></b></a><p class="tagline">The Theory. The Evidence. Both Sides. <b>You Decide...</b></p><p>Real cases. Real documents. You decide.</p></div>
+<div><h2>Explore</h2><ul><li><a href="#videos">Videos</a></li><li><a href="#books">Books</a></li><li><a href="#blog">Blog</a></li><li><a href="#free">Free downloads</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></div>
+<div><h2>Legal</h2><ul><li><a href="#privacy">Privacy Policy</a></li><li><a href="#terms">Terms of Use</a></li><li><a href="#disclaimer">Disclaimer</a></li><li><a href="#affiliate-disclosure">Affiliate Disclosure</a></li><li><a href="#cookies">Cookie Policy</a></li><li><a href="#refunds">Refund Policy</a></li></ul></div>
+<div><h2>Follow</h2><ul><li><a href="https://www.youtube.com/@CTExplainedTV" rel="noopener">YouTube</a></li><li><a href="https://x.com/CTExplainedTV" rel="noopener">X</a></li><li><a href="https://www.tiktok.com/@CTExplainedTV" rel="noopener">TikTok</a></li><li><a href="https://www.instagram.com/CTExplainedTV" rel="noopener">Instagram</a></li></ul></div>
+</div><p class="legal"><span>&copy; 2026 Sharing Ideas Network. All rights reserved.</span><span>For education and discussion. A theory is not a fact until the evidence says so.</span></p></div></footer>
+<script>// Conspiracy Theories Explained — small helpers. No tracking, no cookies.
+(function () {
+  var preview = document.documentElement.hasAttribute('data-preview');
+
+  // 1. Videos: the YouTube player loads only after a click (faster pages, better privacy).
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-yt]');
+    if (!t || preview) return; // in the preview the link simply opens YouTube
+    e.preventDefault();
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(t.getAttribute('data-yt')) + '?autoplay=1&rel=0';
+    f.title = t.getAttribute('aria-label') || 'Video';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.allowFullscreen = true;
+    t.appendChild(f);
+    t.removeAttribute('data-yt');
+  });
+
+  // 2. Forms: show a clear note when a form is not connected yet.
+  document.addEventListener('submit', function (e) {
+    var form = e.target;
+    if (!form.matches('[data-form]')) return;
+    var msg = form.querySelector('.form-msg');
+    var hp = form.querySelector('.hp input');
+    if (hp && hp.value) { e.preventDefault(); return; } // spam trap
+    if (preview || !form.getAttribute('action')) {
+      e.preventDefault();
+      if (msg) {
+        msg.hidden = false;
+        msg.textContent = preview
+          ? 'This is the preview. On the live site, this form sends for real once you connect it (see the Go-Live Guide).'
+          : 'This form is not connected yet. Please email us instead.';
+      }
+    }
+  });
+
+  // 3. Preview only: show one page at a time, picked by the #name in the address.
+  if (preview) {
+    var pages = document.querySelectorAll('.pv');
+    var show = function () {
+      var name = (location.hash || '#home').slice(1);
+      var target = document.getElementById('pv-' + name) || document.getElementById('pv-home');
+      pages.forEach(function (p) { p.hidden = p !== target; });
+      document.querySelectorAll('.nav a').forEach(function (a) {
+        if (a.getAttribute('href') === '#' + target.id.slice(3)) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+      window.scrollTo(0, 0);
+    };
+    window.addEventListener('hashchange', show);
+    show();
+  }
+})();
+</script></body></html>

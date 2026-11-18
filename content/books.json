@@ -1,0 +1,42 @@
+[
+  { "slug": "conspiracy-theory-two-words-that-changed-the-world", "title": "Conspiracy Theory: Two Words That Changed the World", "coverLines": ["CONSPIRACY", "THEORY"], "redLine": 1,
+    "subtitle": "The Strange History of Conspiracy Theories, Cover-Ups and the Minds Caught Between Them",
+    "author": "JR Korvus", "stamp": "DECLASSIFIED", "caseLabel": "CASE FILE · ROME TO TODAY", "cover": "cover-conspiracy-theory.jpg",
+    "status": "Coming soon", "amazonUrl": "", "directUrl": "", "formats": "",
+    "blurb": "Two men each believed powerful people were hiding a crime. One was right and helped end a 40-year medical scandal. The other was wrong and walked into a pizza shop with a rifle. This book follows the strange history of conspiracy theories and asks how to tell a real cover-up from a false story.",
+    "inside": [
+      "An introduction, 13 chapters and a conclusion",
+      "From the night Rome burned to the Illuminati and a forgery that would not die",
+      "Where the words \"conspiracy theory\" came from",
+      "Real cover-ups that turned out to be true, like the Tuskegee study and the FBI break-in of 1971",
+      "Why our brains see patterns, and the real people hurt by false stories",
+      "Notes and sources for every chapter"
+    ] },
+  { "slug": "the-paperclip-secret", "title": "The Paperclip Secret", "coverLines": ["THE", "PAPERCLIP", "SECRET"], "redLine": 2,
+    "subtitle": "How America Hid the Crimes of Hitler's Scientists to Win the Race to the Moon",
+    "author": "JR Korvus", "stamp": "CLASSIFIED", "caseLabel": "CASE FILE · NORDHAUSEN 1945", "cover": "cover-the-paperclip-secret.jpg",
+    "status": "Coming soon", "amazonUrl": "", "directUrl": "", "formats": "",
+    "blurb": "In 1969 the world cheered as a giant rocket carried men to the Moon. Few knew that some of the men behind it had run a Nazi rocket factory where thousands of prisoners died. This book shows how their pasts were hidden, and how the truth finally came out.",
+    "inside": [
+      "An introduction, 13 chapters and a conclusion",
+      "The rocket factory inside a mountain, and the prisoners who built the V-2",
+      "How Operation Paperclip brought German scientists to America and cleaned up their files",
+      "The doctors from Dachau, and the trial that asked the wrong questions",
+      "Huntsville, the Saturn V and the race to the Moon",
+      "The survivors, the reporter and the Nazi hunter who opened the vaults",
+      "A note on sources, with disputed facts clearly marked"
+    ] },
+  { "slug": "case-never-closed", "title": "Case Never Closed", "coverLines": ["CASE", "NEVER", "CLOSED"], "redLine": 2,
+    "subtitle": "The JFK Assassination Cover-Up in the Government's Own Declassified Words",
+    "author": "JR Korvus", "stamp": "DECLASSIFIED", "caseLabel": "CASE FILE · DALLAS 1963", "cover": "cover-case-never-closed.jpg",
+    "status": "Coming soon", "amazonUrl": "", "directUrl": "", "formats": "",
+    "blurb": "No one was ever put on trial for killing President Kennedy. The only man charged was shot dead two days later. This book uses the government's own released papers to show what was hidden, how it was hidden, and why the case never closed.",
+    "inside": [
+      "An introduction, 10 chapters and a conclusion",
+      "The four days in Dallas, the Warren Commission and the bullet everyone argues about",
+      "What was hidden, how it was hidden, and the files released in 2025",
+      "A graded list of suspects, with both sides of each question",
+      "A timeline from 1963 to 2026",
+      "A guide to checking the book yourself, with sources by chapter"
+    ] }
+]

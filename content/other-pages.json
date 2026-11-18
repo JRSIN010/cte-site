@@ -1,0 +1,85 @@
+{
+  "_how_to_edit": "Words for every page except the home page. Change only the words between the quote marks. Put *stars* around words in a headline to make them red. {author} turns into your author name by itself.",
+
+  "videoCards": {
+    "comingSoon": "Coming soon",
+    "play": "Play",
+    "fromTheBook": "From the book:"
+  },
+
+  "videosPage": {
+    "label": "ON YOUTUBE",
+    "title": "Case File Videos",
+    "intro": "Each video takes one case and walks through the theory, the evidence and both sides. Click a video to play it here.",
+    "shortsLabel": "SHORTS",
+    "shortsHeadline": "Quick *clues*"
+  },
+
+  "booksPage": {
+    "label": "THE BOOKS",
+    "title": "Books by {author}",
+    "intro": "Real cases. Real documents. Both sides. Each book is the full version of a case file.",
+    "detailsButton": "Details"
+  },
+
+  "bookPage": {
+    "by": "By",
+    "formats": "Formats:",
+    "insideHeading": "What is inside",
+    "backLink": "All books",
+    "videosLabel": "WATCH FIRST",
+    "videosHeadline": "Videos from *this book*"
+  },
+
+  "blogPage": {
+    "label": "CASE NOTES",
+    "title": "The Blog",
+    "intro": "Short reads on the cases, the documents and how to check a claim for yourself."
+  },
+
+  "blogPost": {
+    "by": "By",
+    "endBoxTitle": "Want to check claims like this yourself?",
+    "endBoxText": "Get the free Evidence Checklist. One page, 10 questions.",
+    "endBoxButton": "Get it free",
+    "backLink": "All case notes"
+  },
+
+  "contactPage": {
+    "label": "FILE · CONTACT",
+    "title": "Contact",
+    "intro": "Got a tip, a correction or a question? Send it here.",
+    "nameLabel": "Your name",
+    "emailLabel": "Your email",
+    "messageLabel": "Your message",
+    "sendButton": "Send message",
+    "otherWaysHeading": "Other ways to reach us",
+    "emailWord": "Email:",
+    "mistakeNote": "Found a mistake in a video, post or book? Please tell us what it is and where you saw it. We check every one."
+  },
+
+  "freePage": {
+    "label": "FREE DOWNLOADS",
+    "title": "Free Case File Tools",
+    "intro": "Enter your email once and get both. You will also hear when a new case file comes out.",
+    "formLabel": "GET BOTH",
+    "formTitle": "Where should I send them?",
+    "formButton": "Send them to me"
+  },
+
+  "thanksPage": {
+    "label": "FILE RELEASED",
+    "title": "Thank you. Here are your files.",
+    "text": "Your downloads are ready. Click to open or save them.",
+    "nextHeading": "What next?",
+    "watchLink": "Watch the case files",
+    "booksLink": "See the books"
+  },
+
+  "notFoundPage": {
+    "label": "FILE NOT FOUND",
+    "title": "This file is missing",
+    "text": "The page you asked for is not here. It may have moved.",
+    "button": "Back to the home page"
+  }
+}

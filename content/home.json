@@ -1,0 +1,83 @@
+{
+  "_how_to_edit": "Change only the words between the quote marks. Put *stars* around words in a headline to make them red. Headlines show in ALL CAPS by design.",
+
+  "menu": {
+    "videos": "Videos",
+    "books": "Books",
+    "blog": "Blog",
+    "about": "About",
+    "freeButton": "Free checklist"
+  },
+
+  "hero": {
+    "label": "CASE FILES · DECLASSIFIED",
+    "titleLine1": "Conspiracy Theories",
+    "titleLine2": "Explained",
+    "intro": "Just the cases laid out, so you can judge. Unsolved mysteries, fantastic stories and cover-ups, told with real documents.",
+    "button1": "Watch the case files",
+    "button2": "Get the free checklist",
+    "stampBig": "NEW",
+    "stampSmall": "Case File"
+  },
+
+  "videos": {
+    "label": "ON YOUTUBE",
+    "headline": "Latest *case files*",
+    "button": "See all videos",
+    "subscribeButton": "Subscribe on YouTube"
+  },
+
+  "steps": {
+    "label": "HOW EVERY CASE WORKS",
+    "headline": "Four steps. *Every time.*",
+    "items": [
+      { "title": "The Theory", "text": "What do people say happened? You hear it the way its fans tell it." },
+      { "title": "The Evidence", "text": "Reports, memos, tapes and sworn words, with sources you can check." },
+      { "title": "Both Sides", "text": "The best case for it. The best case against it. Side by side." },
+      { "title": "You Decide", "text": "No verdict from me. The last step is yours." }
+    ]
+  },
+
+  "books": {
+    "label": "THE BOOKS",
+    "headline": "Go deeper than a *video* can",
+    "intro": "Each case file starts as a book by {author}. The videos are the short version. The books hold the full story and the sources.",
+    "button": "About this book"
+  },
+
+  "freeDownload": {
+    "label": "FREE · 1 PAGE",
+    "headline": "Check any theory in *10 questions*",
+    "text": "Get the free Evidence Checklist. It is one page. Use it on any claim you hear, from any side. You will also get an email when a new case file comes out.",
+    "button": "Send me the checklist",
+    "smallPrint": "No spam. Unsubscribe any time.",
+    "cardLabel": "FREE DOWNLOAD",
+    "cardTitle": "The Evidence Checklist",
+    "cardItems": [
+      "Who is making the claim?",
+      "Can I see the source myself?",
+      "Is it a fact, a guess or an opinion?",
+      "What would prove it wrong?",
+      "What does the other side say?"
+    ],
+    "cardMore": "... and 5 more.",
+    "cardStamp": "FREE"
+  },
+
+  "blog": {
+    "label": "CASE NOTES",
+    "headline": "From the *blog*",
+    "button": "Read all case notes"
+  },
+
+  "buyButtons": {
+    "amazon": "Buy on Amazon",
+    "direct": "Buy the eBook here",
+    "notify": "Tell me when it is out"
+  },
+
+  "footer": {
+    "line": "Real cases. Real documents. You decide.",
+    "note": "For education and discussion. A theory is not a fact until the evidence says so."
+  }
+}
